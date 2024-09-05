@@ -5,54 +5,131 @@
 @section('content')
     <h1>Отправить сообщение</h1>
 
-    <form method=post action="mailto: kostasmov@mail.ru" id="contactForm">
-        <p>
+    @if(session('success'))
+        <p class="success-box">{{ session('success') }}</p>
+        <hr>
+    @endif
+
+    <form method="post" action="{{ route('contact-form') }}" id="contactForm">
+        @csrf
+
+        <section>
             <b>Фамилия Имя Отчество: </b>
-            <input id="full_name" name="full_name" style="width: 20%;" type="text">
-            <span class="error" id="full_name-error"></span>
-        </p>
+            <input id="full_name" name="full_name" style="width: 20%;" type="text"
+                   class="{{ $errors->has('full_name') ? 'error-input' : '' }}"
+                   value="{{ old('full_name') }}">
 
-        <p>
-            <b>Пол: </b>
-            <input name="sex" type="radio" value="Мужской" required>Мужской
-            <input name="sex" type="radio" value="Женский" required>Женский
-            <span class="error" id="sex-error"></span>
-        </p>
+            @if ($errors->has('full_name'))
+                <span class="error-message">
+                    {{ $errors->first('full_name') }}
+                </span>
+            @endif
+        </section>
 
-        <p>
-            <b>Дата рождения: </b>
-            <input id="birthday" name="birthday" title="birthday" type="text" readonly>
-            <span class="error" id="birthday-error"></span>
-        </p>
+        <section>
+            <p><b>Пол: </b>
+            <input name="sex" type="radio" value="male"
+                {{ old('sex') == 'male' ? 'checked' : '' }}>Мужской
+            <input name="sex" type="radio" value="female"
+                {{ old('sex') == 'female' ? 'checked' : '' }}>Женский
+            </p>
 
-        <p>
-            <b>Телефон: </b>
-            <input id="phone" name="phone" type="text">
-            <span class="error" id="phone-error"></span>
-        </p>
+            @if ($errors->has('sex'))
+                <span class="error-message">
+                    {{ $errors->first('sex') }}
+                </span>
+            @endif
+        </section>
 
-        <p>
-            <b>Возраст: </b>
-            <select name="age" id="age">
+        <section>
+            <p><b>Дата рождения: </b>
+            <input id="birthday" name="birthday" title="birthday" type="text"  readonly
+                   class="{{ $errors->has('birthday') ? 'error-input' : '' }}"
+                   value="{{ old('birthday') }}">
+            </p>
+
+            @if ($errors->has('birthday'))
+                <span class="error-message">
+                    {{ $errors->first('birthday') }}
+                </span>
+            @endif
+        </section>
+
+        <section>
+            <p><b>Телефон: </b>
+            <input id="phone" name="phone" type="text"
+                   class="{{ $errors->has('phone') ? 'error-input' : '' }}"
+                   value="{{ old('phone') }}">
+            </p>
+
+            @if ($errors->has('phone'))
+                <span class="error-message">
+                    {{ $errors->first('phone') }}
+                </span>
+            @endif
+        </section>
+
+        <section>
+            <p><b>Возраст: </b>
+            <select name="age" id="age"
+                    class="{{ $errors->has('age') ? 'error-input' : '' }}">
                 <option value="">Не выбрано</option>
-                <option value="До 18 лет">До 18 лет</option>
-                <option value="18-29 лет">18-29 лет</option>
-                <option value="30-50 лет">30-50 лет</option>
-                <option value="Старше 50 лет">Старше 50 лет</option>
+                <option value="Under 18"
+                    {{ old('age') == 'Under 18' ? 'selected' : '' }}>
+                    До 18 лет
+                </option>
+                <option value="18-29"
+                    {{ old('age') == '18-29' ? 'selected' : '' }}>
+                    18-29 лет
+                </option>
+                <option value="30-50"
+                    {{ old('age') == '30-50' ? 'selected' : '' }}>
+                    30-50 лет
+                </option>
+                <option value="Over 50"
+                    {{ old('age') == 'Over 50' ? 'selected' : '' }}>
+                    Старше 50 лет
+                </option>
             </select>
-            <span class="error" id="age-error"></span>
-        </p>
+            </p>
 
-        <p>
-            <b>E-mail: </b>
-            <input id="mail" name="mail" type="email">
-            <span class="error" id="mail-error"></span>
-        </p>
+            @if ($errors->has('age'))
+                <span class="error-message">
+                    {{ $errors->first('age') }}
+                </span>
+            @endif
+        </section>
 
-        <b>Сообщение:</b><br>
-        <textarea id="message" name="message" rows="4" cols="50"></textarea>
-        <span class="error" id="message-error"></span>
-        <br>
+        <section>
+            <p><b>E-mail: </b>
+            <input id="mail" name="mail" type="email"
+                   class="{{ $errors->has('mail') ? 'error-input' : '' }}"
+                   value="{{ old('mail') }}">
+            </p>
+
+            @if ($errors->has('mail'))
+                <span class="error-message">
+                    {{ $errors->first('mail') }}
+                </span>
+            @endif
+
+        </section>
+
+        <section>
+            <p><b>Сообщение:</b><br>
+            <textarea id="message" name="message" rows="4" cols="50"
+                      class="{{ $errors->has('message') ? 'error-input' : '' }}">
+                {{ old('message') }}
+            </textarea>
+            </p>
+
+            @if ($errors->has('message'))
+                <span class="error-message">
+                    {{ $errors->first('message') }}
+                </span>
+                <br>
+            @endif
+        </section>
 
         <input type="submit" value="Отправить" id="submit">
         <input type="reset" value="Очистить форму">
@@ -60,6 +137,6 @@
 @endsection
 
 @section('foot-scripts')
-    <script src="{{ asset('scripts/contact-validator.js') }}"></script>
+{{--    <script src="{{ asset('scripts/contact-validator.js') }}"></script>--}}
     <script src="{{ asset('scripts/calendar.js') }}"></script>
 @endsection

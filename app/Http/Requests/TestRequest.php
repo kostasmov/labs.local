@@ -17,17 +17,17 @@ class TestRequest extends FormRequest
             'full_name' => 'required|regex:/^[А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+$/u',
             'course' => 'required',
             'quest1' => ['required', 'in:2'],
-            'quest2' => ['required', 'in:2'],
-            'quest3' => ['required', 'in:ПРИБОР']
+            'quest2' => ['required', 'in:3'],
+            'quest3' => ['required', 'in:прибор']
         ];
     }
 
     public function messages(): array
     {
         return [
-            'full_name.required' => "Не введено имя",
+            'full_name.required' => "Введите имя",
             'full_name.regex' => "Ошибка в формате имени",
-            'course.required' => "Не введена группа обучения",
+            'course.required' => "Введите группу обучения",
             'quest1.required' => "Не введён Ответ 1",
             'quest2.required' => "Не введён Ответ 2",
             'quest3.required' => "Не введён Ответ 3",

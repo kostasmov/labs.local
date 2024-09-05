@@ -23,3 +23,4 @@ Route::get('/test', [TestController::class,'index'])->name('test');
 Route::get('/history', [HistoryController::class,'index'])->name('history');
 
 Route::post('/test/submit', [TestController::class,'submit'])->name('test-form');
+Route::post('/contacts/submit', [ContactsController::class,'submit'])->name('contact-form');

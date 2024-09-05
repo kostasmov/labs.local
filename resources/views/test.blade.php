@@ -10,32 +10,28 @@
     <h1>Тест по дисциплине "Основы электротехники и электроники"</h1>
 
     @if(session('success'))
-        <div>
-            <p>{{ session('success') }}</p>
-        </div>
+        <p class="success-box">{{ session('success') }}</p>
+        <hr>
     @endif
 
     @if($errors->any())
-        <div>
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+        @foreach($errors->all() as $error)
+            <p class="error-box">{{ $error }}</p>
+        @endforeach
+        <hr>
     @endif
 
-    <form method="POST" action="{{ route('test-form') }}" id="testForm">
+    <form method="post" action="{{ route('test-form') }}" id="testForm">
         @csrf
 
         <section>
             <p>
-                Фамилия Имя Отчество:
+                <b>Фамилия Имя Отчество:</b>
                 <input id="full_name" name="full_name" type="text" style="width: 20%;">
             </p>
 
             <p>
-                Группа:
+                <b>Группа:</b>
                 <select name="course">
                     <optgroup label="3 курс">
                         <option value="ИС/б-22-1-о">ИС/б-22-1-о</option>
@@ -52,14 +48,14 @@
         </section>
 
         <section>
-            <p>Вопрос 1: Какая формула описывает закон Ома?</p>
+            <p><b>Вопрос 1:</b> Какая формула описывает закон Ома?</p>
             <input type="radio" name="quest1" value="1"> U = I / R<br>
             <input type="radio" name="quest1" value="2"> I = U / R<br>
             <input type="radio" name="quest1" value="3"> R = U * I<hr>
         </section>
 
         <section>
-            <p>Вопрос 2: Что такое сопротивление в электрической цепи?</p>
+            <p><b>Вопрос 2:</b> Что такое сопротивление в электрической цепи?</p>
             <select name="quest2">
                 <option value="">Выберите ответ</option>
                 <option value="1">Отрицательная энергия</option>
@@ -72,7 +68,7 @@
         </section>
 
         <section>
-            <p>Вопрос 3: Что такое триггер?</p>
+            <p><b>Вопрос 3:</b> Что такое триггер?</p>
             <textarea id="quest3" name="quest3" rows="2" cols="50"></textarea>
             <hr>
         </section>

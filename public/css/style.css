@@ -105,7 +105,7 @@ nav ul li a:hover {
 
 /* Проверка заполнения формы "Контакт" */
 .error-message {
-  display: none;
+  display: block;
   color: red;
   margin-top: 5px;
 }
@@ -121,7 +121,18 @@ nav ul li a:hover {
 .red-border {
   border: 2px solid red;
 }
-
+.error-box {
+    background-color: rgba(255, 45, 32, 0.65);
+    padding: 3px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.success-box {
+    background-color: rgb(36, 221, 0);
+    padding: 3px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
 
 /* Календарь */
 .calendar {
