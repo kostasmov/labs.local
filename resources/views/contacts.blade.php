@@ -8,6 +8,8 @@
             const form = document.querySelector('#contactForm');
             form.reset();
 
+            document.getElementById('age').value = '';
+
             location.reload();
         }
     </script>
@@ -88,15 +90,15 @@
                     {{ old('age') == 'Under 18' ? 'selected' : '' }}>
                     До 18 лет
                 </option>
-                <option value="18-29"
+                <option value='18-29'
                     {{ old('age') == '18-29' ? 'selected' : '' }}>
                     18-29 лет
                 </option>
-                <option value="30-50"
+                <option value='30-50'
                     {{ old('age') == '30-50' ? 'selected' : '' }}>
                     30-50 лет
                 </option>
-                <option value="Over 50"
+                <option value='Over 50'
                     {{ old('age') == 'Over 50' ? 'selected' : '' }}>
                     Старше 50 лет
                 </option>
@@ -122,15 +124,12 @@
                     {{ $errors->first('mail') }}
                 </span>
             @endif
-
         </section>
 
         <section>
             <p><b>Сообщение:</b><br>
             <textarea id="message" name="message" rows="4" cols="50"
-                      class="{{ $errors->has('message') ? 'error-input' : '' }}">
-                {{ old('message') }}
-            </textarea>
+                      class="{{ $errors->has('message') ? 'error-input' : '' }}">{{ old('message') }}</textarea>
             </p>
 
             @if ($errors->has('message'))
@@ -141,8 +140,8 @@
             @endif
         </section>
 
-        <input type="submit" value="Отправить" id="submit">
-        <input type="reset" onclick="resetForm()" value="Очистить форму">
+        <input type="submit" value="Отправить">
+        <input type="button" onclick="resetForm()" value="Очистить форму">
     </form>
 @endsection
 
