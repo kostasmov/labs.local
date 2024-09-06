@@ -103,7 +103,7 @@ nav ul li a:hover {
 }
 
 
-/* Проверка заполнения формы "Контакт" */
+/* Проверка заполнения форм */
 .error-message {
   display: block;
   color: red;
@@ -111,15 +111,6 @@ nav ul li a:hover {
 }
 .error-input {
   border: 1px solid red;
-}
-.valid-input {
-  border: 1px solid green;
-}
-
-
-/* Проверка заполнения формы "Тест" */
-.red-border {
-  border: 2px solid red;
 }
 .error-box {
     background-color: rgba(255, 45, 32, 0.65);

@@ -2,6 +2,17 @@
 
 @section('title', 'ЛР: Контакт')
 
+@section('head-scripts')
+    <script>
+        function resetForm() {
+            const form = document.querySelector('#contactForm');
+            form.reset();
+
+            location.reload();
+        }
+    </script>
+@endsection
+
 @section('content')
     <h1>Отправить сообщение</h1>
 
@@ -71,8 +82,7 @@
 
         <section>
             <p><b>Возраст: </b>
-            <select name="age" id="age"
-                    class="{{ $errors->has('age') ? 'error-input' : '' }}">
+            <select name="age" id="age">
                 <option value="">Не выбрано</option>
                 <option value="Under 18"
                     {{ old('age') == 'Under 18' ? 'selected' : '' }}>
@@ -132,11 +142,10 @@
         </section>
 
         <input type="submit" value="Отправить" id="submit">
-        <input type="reset" value="Очистить форму">
+        <input type="reset" onclick="resetForm()" value="Очистить форму">
     </form>
 @endsection
 
 @section('foot-scripts')
-{{--    <script src="{{ asset('scripts/contact-validator.js') }}"></script>--}}
     <script src="{{ asset('scripts/calendar.js') }}"></script>
 @endsection

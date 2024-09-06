@@ -9,7 +9,7 @@ class TestController extends Controller
 {
     public function submit(TestRequest $request)
     {
-        return redirect()->back()->with('success', 'Данные успешно отправлены!');
+        return redirect()->back()->with('success', 'Тест успешно пройден!');
     }
 
     public function index()
