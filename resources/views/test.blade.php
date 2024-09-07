@@ -13,8 +13,8 @@
             const form = document.querySelector('#testForm');
             form.reset()
 
-            document.querySelector('#course').value = 'ИС/б-22-1-о';
-            document.querySelector('#quest2').value = '';
+            document.getElementById('course').value = 'ИС/б-22-1-о';
+            document.getElementById('quest2').value = '';
 
             location.reload();
         }
@@ -27,7 +27,7 @@
     @if(session('success'))
         <p class="success-box">{{ session('success') }}</p>
         <hr>
-    @elseif(old('quest1') && old('quest2') && old('quest3'))
+    @elseif(old('quest1') && old('quest2') && old('quest3') && !$errors->has('full_name'))
         @if($errors->has('quest1'))
             <p class="error-box">{{ $errors->first('quest1') }}</p>
         @else
@@ -138,7 +138,7 @@
 
         <section>
             <input type="submit" value="Отправить">
-            <input type="reset" onclick="resetForm()" value="Очистить форму">
+            <input type="button" onclick="resetForm()" value="Очистить форму">
         </section>
     </form>
 @endsection

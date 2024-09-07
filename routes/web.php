@@ -8,7 +8,9 @@ use App\Http\Controllers\StudyController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\GuestbookController;
+use App\Http\Controllers\BlogController;
+//use App\Http\Controllers\HistoryController;
 
 Route::get('/', function () {
     return view('index');
@@ -20,7 +22,9 @@ Route::get('/study', [StudyController::class,'index'])->name('study');
 Route::get('/album', [AlbumController::class,'index'])->name('album');
 Route::get('/contacts', [ContactsController::class,'index'])->name('contacts');
 Route::get('/test', [TestController::class,'index'])->name('test');
-Route::get('/history', [HistoryController::class,'index'])->name('history');
+//Route::get('/history', [HistoryController::class,'index'])->name('history');
+Route::get('/guestbook', [GuestbookController::class,'index'])->name('guestbook');
+Route::get('/blog', [BlogController::class,'index'])->name('blog');
 
 Route::post('/test/submit', [TestController::class,'submit'])->name('test-form');
 Route::post('/contacts/submit', [ContactsController::class,'submit'])->name('contact-form');

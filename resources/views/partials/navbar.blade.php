@@ -16,6 +16,8 @@
             <li><a href="{{ route('album') }}">Фотоальбом</a></li>
             <li><a href="{{ route('contacts') }}">Контакт</a></li>
             <li><a href="{{ route('test') }}">Тест</a></li>
+            <li><a href="{{ route('guestbook') }}">Гостевая книга</a></li>
+            <li><a href="{{ route('blog') }}">Мой блог</a></li>
 {{--            <li><a href="{{ route('history') }}">История просмотра</a></li>--}}
             <li><p id="currentDateTime"></p></li>
         </ul>

@@ -8,17 +8,9 @@ use App\Http\Requests\TestVerificationRequest;
 
 class TestController extends Controller
 {
-    public function submit(Request $request)
+    public function submit(TestValidationRequest $request)
     {
-        $hasQuest1 = $request->filled('quest1');
-        $hasQuest2 = $request->filled('quest2');
-        $hasQuest3 = $request->filled('quest3');
-
-        if ($hasQuest1 && $hasQuest2 && $hasQuest3) {
-            app(TestVerificationRequest::class);
-        } else {
-            app(TestValidationRequest::class);
-        }
+        app(TestVerificationRequest::class);
 
         return redirect()->back()->withInput()->with('success', 'Тест успешно пройден!');
     }
