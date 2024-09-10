@@ -31,6 +31,8 @@
                 <p class="blog-datetime">{{ $post->created_at }}</p>
             </div>
         @endforeach
+
+        {{ $posts->links('vendor.pagination.custom') }}
     @else
         <p>Постов нет.</p>
     @endif

@@ -33,7 +33,7 @@ class BlogController extends Controller
 
     public function index()
     {
-        $posts = Blog::orderBy('created_at', 'desc')->get();
+        $posts = Blog::orderBy('created_at', 'desc')->paginate(2);
 
         return view('blog', compact('posts'));
     }
