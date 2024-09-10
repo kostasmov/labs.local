@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
 
 use App\Models\Blog;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class BlogController extends Controller
 {
@@ -17,9 +17,14 @@ class BlogController extends Controller
             $imagePath = $request->file('image')->store('blog_images', 'public');
         }
 
+        $message = $request->input('message');
+        $message = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+        $message = preg_replace('/(\r\n|\r|\n){2}/', '<br><br>', $message);
+        $message = preg_replace('/(\r\n|\r|\n)/', '<br>', $message);
+
         Blog::create([
             'theme' => $request->input('theme'),
-            'message' => $request->input('message'),
+            'message' => $message,
             'image' => $imagePath,
         ]);
 
@@ -46,26 +51,49 @@ class BlogController extends Controller
     public function upload(Request $request)
     {
         $file = $request->file('file');
-        $lines = file($file->getRealPath());
 
         if ($file->getSize() == 0) {
             return redirect()->back()->withErrors('Файл пустой');
         }
 
-        foreach ($lines as $lineNumber => $line) {
-            if ($lineNumber === 0) continue;
+        $handle = fopen($file->getRealPath(), 'r');
 
-            $row = explode(';', $line);
+        $blogs = [];
+        $i = 0;
 
-            if (count($row) < 4 || empty($row[1]) || empty($row[2]) || empty($row[3])) {
-                return redirect()->back()->withErrors('Ошибка в структуре файла');
+        while (($fields = fgetcsv($handle, 0)) !== false) {
+            $i++;
+            if ($i === 1) continue;
+
+            if (count($fields) < 5) {
+                return redirect()->back()->withErrors("Ошибка в структуре файла на строке $i");
             }
 
-            Blog::create([
-                'theme' => $row[1],
-                'message' => $row[2],
-                'image' => !($row[3] == 'NULL') ? $row[3] : null
-            ]);
+            $data = [
+                'theme' => $fields[1],
+                'message' => $fields[2],
+                'image' => !($fields[3] == 'NULL') ? $fields[3] : null
+            ];
+
+            $rules = [
+                'theme' => 'required|string|max:100',
+                'message' => 'required|max:1000',
+                'image' => 'nullable|string'
+            ];
+
+            $validator = Validator::make($data, $rules);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors("Ошибка валидации файла на строке $i");
+            }
+
+            $blogs[] = $data;
+        }
+
+        fclose($handle);
+
+        foreach ($blogs as $blogData) {
+            Blog::create($blogData);
         }
 
         return redirect()->route('blog')->with('success', 'Данные успешно загружены');

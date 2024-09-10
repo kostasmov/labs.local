@@ -16,6 +16,7 @@ class BlogRequest extends FormRequest
         return [
             'theme' => 'required|string|max:100',
             'message' => 'required|max:1000',
+            'created_at' => 'date',
         ];
     }
 

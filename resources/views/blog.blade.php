@@ -18,10 +18,10 @@
     @if (count($posts) > 0)
         @foreach ($posts as $post)
             <div class="blog">
-                <h1>{{ $post->theme }}</h1>
+                <h1>{!! $post->theme !!}</h1>
 
                 <section>
-                    <p>{!! nl2br(e($post->message)) !!}</p>
+                    <p>{!! $post->message !!}</p>
 
                     @if($post->image)
                         <img src="{{ asset('storage/' . $post->image) }}" alt="Изображение поста">
