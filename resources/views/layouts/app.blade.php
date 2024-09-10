@@ -23,7 +23,6 @@
 
     @yield('foot-scripts')
     <script src="{{ asset('scripts/drop_menu.js') }}"></script>
-    {{--<script src="{{ asset('scripts/history.js') }}"></script>--}}
 </body>
 
 </html>

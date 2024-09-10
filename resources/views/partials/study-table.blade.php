@@ -1,4 +1,5 @@
 <table class="study-table">
+    <thead>
     <tr>
         <td rowspan="3">№</td>
         <th rowspan="3">Дисциплина</th>
@@ -14,6 +15,8 @@
         <th colspan="3">3 сем</th>
         <th colspan="3">4 сем</th>
     </tr>
+    </thead>
+    <tbody>
     <tr>
         <td>1</td>
         <td><i style="text-align: left;">Экология</i></td>
@@ -102,4 +105,5 @@
         <th>1</th> <th>1</th> <th>0</th>
         <th>2</th> <th>1</th> <th>1</th>
     </tr>
+    </tbody>
 </table>

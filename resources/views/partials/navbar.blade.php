@@ -2,7 +2,7 @@
     <nav>
         <ul>
             <li><a href="{{ route('index') }}"><img width="25px" src="{{ asset('photos/logo.png') }}" alt="Логотип"></a></li>
-            <li><a href="{{ route('about-me') }}">Обо мне</a></li>
+{{--            <li><a href="{{ route('about-me') }}">Обо мне</a></li>--}}
             <li class="dropdown">
                 <a href="{{ route('interests') }}">Мои интересы</a>
                 <ul class="dropdown-content">
@@ -18,7 +18,6 @@
             <li><a href="{{ route('test') }}">Тест</a></li>
             <li><a href="{{ route('guestbook') }}">Гостевая книга</a></li>
             <li><a href="{{ route('blog') }}">Мой блог</a></li>
-{{--            <li><a href="{{ route('history') }}">История просмотра</a></li>--}}
             <li><p id="currentDateTime"></p></li>
         </ul>
     </nav>

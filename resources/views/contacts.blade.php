@@ -27,7 +27,7 @@
         @csrf
 
         <section>
-            <b>Фамилия Имя Отчество: </b>
+            <b>ФИО: </b>
             <input id="full_name" name="full_name" style="width: 20%;" type="text"
                    class="{{ $errors->has('full_name') ? 'error-input' : '' }}"
                    value="{{ old('full_name') }}">

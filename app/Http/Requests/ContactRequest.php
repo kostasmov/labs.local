@@ -20,7 +20,7 @@ class ContactRequest extends FormRequest
             'phone' => 'required|regex:/^\+?[0-9]{10,15}$/',
             'age' => 'required',
             'mail' => 'required|email',
-            'message' => 'required',
+            'message' => 'required,',
         ];
     }
 
