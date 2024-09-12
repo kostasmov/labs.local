@@ -126,6 +126,14 @@ nav ul li a:hover {
     margin-bottom: 5px;
     margin-top: 5px;
 }
+.bg-success {
+    background-color: rgb(36, 221, 0);
+    /*color: #155724;*/
+}
+.bg-error {
+    background-color: rgba(255, 45, 32, 0.65);
+    /*color: #721c24;*/
+}
 
 /* Календарь */
 .calendar {

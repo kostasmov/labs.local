@@ -1,9 +1,4 @@
-@php use Illuminate\Support\MessageBag; @endphp
 @extends('layouts.app')
-
-@php
-    /** @var MessageBag $errors */
-@endphp
 
 @section('title', 'ЛР: Тест по дисциплине "Основы электротехники и электроники"')
 
@@ -141,4 +136,37 @@
             <input type="button" onclick="resetForm()" value="Очистить форму">
         </section>
     </form>
+
+    @if (count($results) > 0)
+        <hr>
+        <table>
+            <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Группа</th>
+                <th>Вопрос 1</th>
+                <th>Вопрос 2</th>
+                <th>Вопрос 3</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($results as $result)
+                <tr>
+                    <td>{{ $result['full_name'] }}</td>
+                    <td>{{ $result['course'] }}</td>
+
+                    @php
+                        $correct1Class = $result['correct1'] ? 'bg-success' : 'bg-error';
+                        $correct2Class = $result['correct2'] ? 'bg-success' : 'bg-error';
+                        $correct3Class = $result['correct3'] ? 'bg-success' : 'bg-error';
+                    @endphp
+
+                    <td class="{{ $correct1Class }}">{{ $result['quest1'] }}</td>
+                    <td class="{{ $correct2Class }}">{{ $result['quest2'] }}</td>
+                    <td class="{{ $correct3Class }}">{!! nl2br(e($result['quest3'])) !!}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    @endif
 @endsection

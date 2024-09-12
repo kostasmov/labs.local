@@ -18,11 +18,11 @@ class TestController extends Controller
 
             'quest1' => (int) $request->input('quest1'),
             'quest2' => (int) $request->input('quest2'),
-            'quest3' => (int) $request->input('quest3'),
+            'quest3' => $request->input('quest3'),
 
             'correct1' => $request->input('quest1') === '2',
-            'correct2' => $request->input('quest1') === '3',
-            'correct3' => $request->input('quest1') === 'триггер'
+            'correct2' => $request->input('quest2') === '3',
+            'correct3' => $request->input('quest3') === 'триггер'
         ]);
 
         app(TestVerificationRequest::class);
@@ -32,6 +32,8 @@ class TestController extends Controller
 
     public function index()
     {
-        return view('test');
+        $results = TestResult::orderBy('created_at', 'desc')->get();
+
+        return view('test', compact('results'));
     }
 }

@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('course');
             $table->unsignedInteger('quest1');
             $table->unsignedInteger('quest2');
-            $table->unsignedInteger('quest3');
+            $table->text('quest3');
             $table->boolean('correct1');
             $table->boolean('correct2');
             $table->boolean('correct3');

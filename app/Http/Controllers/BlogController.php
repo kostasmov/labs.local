@@ -22,8 +22,10 @@ class BlogController extends Controller
         $message = preg_replace('/(\r\n|\r|\n){2}/', '<br><br>', $message);
         $message = preg_replace('/(\r\n|\r|\n)/', '<br>', $message);
 
+        $theme = htmlspecialchars($request->input('theme'), ENT_QUOTES, 'UTF-8');
+
         Blog::create([
-            'theme' => $request->input('theme'),
+            'theme' => $theme,
             'message' => $message,
             'image' => $imagePath,
         ]);
@@ -84,7 +86,7 @@ class BlogController extends Controller
             $validator = Validator::make($data, $rules);
 
             if ($validator->fails()) {
-                return redirect()->back()->withErrors("Ошибка валидации файла на строке $i");
+                return redirect()->back()->withErrors("Ошибка валидации файла");
             }
 
             $blogs[] = $data;
