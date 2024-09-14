@@ -20,7 +20,7 @@ class ContactRequest extends FormRequest
             'phone' => 'required|regex:/^\+?[0-9]{10,15}$/',
             'age' => 'required',
             'mail' => 'required|email',
-            'message' => 'required,',
+            'message' => 'required',
         ];
     }
 
@@ -36,7 +36,7 @@ class ContactRequest extends FormRequest
             'phone.regex' => "Ошибка в записи номера телефона",
             'age.required' => "Не указан возраст",
             'mail.required' => "Не указана почта",
-            'message.required' => "Пустое сообщение",
+            'message.required' => "Пустое сообщение"
         ];
     }
 }

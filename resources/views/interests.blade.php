@@ -2,10 +2,6 @@
 
 @section('title', 'ЛР: Мои интересы')
 
-@section('head-scripts')
-    <script src="{{ asset('scripts/fill-lists.js') }}"></script>
-@endsection
-
 @section('content')
 <h1>Мои интересы</h1>
 <h2>Допустим, мне нравится изучать природу</h2>

@@ -12,12 +12,13 @@
                     <li><a href="{{ route('interests') }}#autumn">Осень</a></li>
                 </ul>
             </li>
-            <li><a href="{{ route('study') }}">Учеба</a></li>
+{{--            <li><a href="{{ route('study') }}">Учеба</a></li>--}}
             <li><a href="{{ route('album') }}">Фотоальбом</a></li>
             <li><a href="{{ route('contacts') }}">Контакт</a></li>
             <li><a href="{{ route('test') }}">Тест</a></li>
             <li><a href="{{ route('guestbook') }}">Гостевая книга</a></li>
             <li><a href="{{ route('blog') }}">Мой блог</a></li>
+            <li><a href="{{ route('visitor-stats') }}">Статистика посещений</a></li>
             <li><p id="currentDateTime"></p></li>
         </ul>
     </nav>
