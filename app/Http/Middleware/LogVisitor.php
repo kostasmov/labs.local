@@ -11,13 +11,13 @@ class LogVisitor
 {
     public function handle(Request $request, Closure $next): Response
     {
-        Visitor::create([
-            'visited_at' => now(),
-            'page_url'   => $request->fullUrl(),
-            'ip_address' => $request->ip(),
-            'host_name'  => gethostbyaddr($request->ip()),
-            'browser'    => $request->header('User-Agent'),
-        ]);
+//        Visitor::create([
+//            'visited_at' => now(),
+//            'page_url'   => $request->fullUrl(),
+//            'ip_address' => $request->ip(),
+//            'host_name'  => gethostbyaddr($request->ip()),
+//            'browser'    => $request->header('User-Agent'),
+//        ]);
 
         return $next($request);
     }

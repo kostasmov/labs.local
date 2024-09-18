@@ -22,7 +22,6 @@
     </main>
 
     @yield('foot-scripts')
-    <script src="{{ asset('scripts/drop_menu.js') }}"></script>
 </body>
 
 </html>

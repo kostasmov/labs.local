@@ -51,58 +51,64 @@
         @csrf
 
         <section>
-            <p>
-                <b>Фамилия Имя Отчество:</b>
-                <input id="full_name" name="full_name" type="text" style="width: 20%;"
-                       class="{{ $errors->has('full_name') ? 'error-input' : '' }}"
-                       value="{{ old('full_name') }}">
-            </p>
+            <label for="full_name"><b>Фамилия Имя Отчество:</b></label>
+            <input id="full_name" name="full_name" type="text" style="width: 20%;"
+                   class="{{ $errors->has('full_name') ? 'error-input' : '' }}"
+                   value="{{ old('full_name') }}">
+            <br><br>
 
-            <p>
-                <b>Группа:</b>
-                <select name="course" id="course">
-                    <optgroup label="3 курс">
-                        <option value="ИС/б-22-1-о"
-                            {{ old('course') == 'ИС/б-22-1-о' ? 'selected' : '' }}>
-                            ИС/б-22-1-о
-                        </option>
-                        <option value="ИС/б-22-2-о"
-                            {{ old('course') == 'ИС/б-22-2-о' ? 'selected' : '' }}>
-                            ИС/б-22-2-о
-                        </option>
-                        <option value="ИС/б-22-3-о"
-                            {{ old('course') == 'ИС/б-22-3-о' ? 'selected' : '' }}>
-                            ИС/б-22-3-о
-                        </option>
-                    </optgroup>
-                    <optgroup label="4 курс">
-                        <option value="ИС/б-21-1-о"
-                            {{ old('course') == 'ИС/б-21-1-о' ? 'selected' : '' }}>
-                            ИС/б-21-1-о
-                        </option>
-                        <option value="ИС/б-21-2-о"
-                            {{ old('course') == 'ИС/б-21-2-о' ? 'selected' : '' }}>
-                            ИС/б-21-2-о
-                        </option>
-                    </optgroup>
-                </select>
-            </p>
+            <label for="course"><b>Группа:</b></label>
+            <select name="course" id="course">
+                <optgroup label="3 курс">
+                    <option value="ИС/б-22-1-о"
+                        {{ old('course') == 'ИС/б-22-1-о' ? 'selected' : '' }}>
+                        ИС/б-22-1-о
+                    </option>
+                    <option value="ИС/б-22-2-о"
+                        {{ old('course') == 'ИС/б-22-2-о' ? 'selected' : '' }}>
+                        ИС/б-22-2-о
+                    </option>
+                    <option value="ИС/б-22-3-о"
+                        {{ old('course') == 'ИС/б-22-3-о' ? 'selected' : '' }}>
+                        ИС/б-22-3-о
+                    </option>
+                </optgroup>
+                <optgroup label="4 курс">
+                    <option value="ИС/б-21-1-о"
+                        {{ old('course') == 'ИС/б-21-1-о' ? 'selected' : '' }}>
+                        ИС/б-21-1-о
+                    </option>
+                    <option value="ИС/б-21-2-о"
+                        {{ old('course') == 'ИС/б-21-2-о' ? 'selected' : '' }}>
+                        ИС/б-21-2-о
+                    </option>
+                </optgroup>
+            </select>
             <hr>
         </section>
 
         <section>
-            <p><b>Вопрос 1:</b> Какая формула описывает закон Ома?</p>
-            <input type="radio" name="quest1" value="1"
-                {{ old('quest1') == '1' ? 'checked' : '' }}> U = I / R<br>
-            <input type="radio" name="quest1" value="2"
-                {{ old('quest1') == '2' ? 'checked' : '' }}> I = U / R<br>
-            <input type="radio" name="quest1" value="3"
-                {{ old('quest1') == '3' ? 'checked' : '' }}> R = U * I
+            <p><label for="quest1"><b>Вопрос 1:</b> Какая формула описывает закон Ома?</label></p>
+            <div>
+                <input type="radio" id="quest1-1" name="quest1" value="1"
+                    {{ old('quest1') == '1' ? 'checked' : '' }}>
+                <label for="quest1-1">U = I / R</label>
+            </div>
+            <div>
+                <input type="radio" id="quest1-2" name="quest1" value="2"
+                    {{ old('quest1') == '2' ? 'checked' : '' }}>
+                <label for="quest1-2">I = U / R</label>
+            </div>
+            <div>
+                <input type="radio" id="quest1-3" name="quest1" value="3"
+                    {{ old('quest1') == '3' ? 'checked' : '' }}>
+                <label for="quest1-3">R = U * I</label>
+            </div>
             <hr>
         </section>
 
         <section>
-            <p><b>Вопрос 2:</b> Что такое сопротивление в электрической цепи?</p>
+            <p><label for="quest2"><b>Вопрос 2:</b> Что такое сопротивление в электрической цепи?</label></p>
             <select name="quest2" id="quest2">
                 <option value="">Выберите ответ</option>
                 <option value="1" {{ old('quest2') == '1' ? 'selected' : '' }}>
@@ -125,7 +131,7 @@
         </section>
 
         <section>
-            <p><b>Вопрос 3:</b> Что такое триггер?</p>
+            <p><label for="quest3"><b>Вопрос 3:</b> Что такое триггер?</label></p>
             <textarea id="quest3" name="quest3" rows="2" cols="50"
                       class="{{ $errors->has('quest3') ? 'error-input' : '' }}">{{ old('quest3') }}</textarea>
             <hr>

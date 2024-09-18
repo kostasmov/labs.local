@@ -6,11 +6,19 @@ use App\Http\Requests\TestValidationRequest;
 use App\Http\Requests\TestVerificationRequest;
 
 use App\Models\TestResult;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class TestController extends Controller
 {
-    public function submit(TestValidationRequest $request)
+    public function index(): View
+    {
+        $results = TestResult::orderBy('created_at', 'desc')->get();
+
+        return view('test', compact('results'));
+    }
+
+    public function submit(TestValidationRequest $request): RedirectResponse
     {
         TestResult::create([
             'full_name' => $request->input('full_name'),
@@ -28,12 +36,5 @@ class TestController extends Controller
         app(TestVerificationRequest::class);
 
         return redirect()->back()->withInput()->with('success', 'Тест успешно пройден!');
-    }
-
-    public function index()
-    {
-        $results = TestResult::orderBy('created_at', 'desc')->get();
-
-        return view('test', compact('results'));
     }
 }

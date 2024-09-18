@@ -10,8 +10,10 @@ class AdminMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
+        if (auth()->check() && auth()->user()->is_admin) {
+            return $next($request);
+        }
 
-
-        return $next($request);
+        return redirect('/');
     }
 }

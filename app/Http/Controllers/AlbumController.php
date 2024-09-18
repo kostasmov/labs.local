@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use Illuminate\View\View;
 use App\Models\Photo;
 
 class AlbumController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $photos = Photo::photos;
         $titles = Photo::titles;

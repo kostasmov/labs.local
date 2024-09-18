@@ -2,35 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\GuestbookRequest;
 
 use Illuminate\Support\Facades\Storage;
 use DateTime;
+use Illuminate\View\View;
 
 class GuestbookController extends Controller
 {
-    public function submit(GuestbookRequest $request)
-    {
-        $validated = $request->validated();
-        $currentDateTime = (new DateTime())->format('d.m.Y H:i:s');
-        $filePath = 'messages/messages.inc';
-
-        $formattedMessage = "{$validated['last_name']};{$validated['first_name']};" .
-            ($request['patronym'] ?? '') .
-            ";{$validated['mail']};" . base64_encode($validated['message']) .
-            ";{$currentDateTime}";
-
-        if (Storage::size($filePath) == 0) {
-            Storage::put($filePath, $formattedMessage);
-        } else {
-            Storage::append($filePath, $formattedMessage);
-        }
-
-        return redirect()->back()->with('success', 'Отзыв отправлен!');
-    }
-
-    public function index()
+    public function index(): View
     {
         $filePath = 'messages/messages.inc';
         $messages = [];
@@ -57,12 +39,32 @@ class GuestbookController extends Controller
         return view('guestbook', ['messages' => $messages]);
     }
 
-    public function loader()
+    public function loader(): View
     {
         return view('guestbook-loader');
     }
 
-    public function upload(Request $request)
+    public function submit(GuestbookRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+        $currentDateTime = (new DateTime())->format('d.m.Y H:i:s');
+        $filePath = 'messages/messages.inc';
+
+        $formattedMessage = "{$validated['last_name']};{$validated['first_name']};" .
+            ($request['patronym'] ?? '') .
+            ";{$validated['mail']};" . base64_encode($validated['message']) .
+            ";{$currentDateTime}";
+
+        if (Storage::size($filePath) == 0) {
+            Storage::put($filePath, $formattedMessage);
+        } else {
+            Storage::append($filePath, $formattedMessage);
+        }
+
+        return redirect()->back()->with('success', 'Отзыв отправлен!');
+    }
+
+    public function upload(Request $request): RedirectResponse
     {
         $filePath = $request->file('file')->getRealPath();
         $fileContent = file_get_contents($filePath);

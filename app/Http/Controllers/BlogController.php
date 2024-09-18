@@ -7,10 +7,29 @@ use App\Http\Requests\BlogRequest;
 
 use App\Models\Blog;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class BlogController extends Controller
 {
-    public function submit(BlogRequest $request)
+    public function index(): View
+    {
+        $posts = Blog::orderBy('created_at', 'desc')->paginate(2);
+
+        return view('blog', compact('posts'));
+    }
+
+    public function editor(): View
+    {
+        return view('blog-editor');
+    }
+
+    public function loader(): View
+    {
+        return view('blog-loader');
+    }
+
+    public function submit(BlogRequest $request): RedirectResponse
     {
         $imagePath = null;
         if ($request->hasFile('image')) {
@@ -33,24 +52,7 @@ class BlogController extends Controller
         return redirect()->route('blog')->with('success', 'Запись добавлена!');
     }
 
-    public function index()
-    {
-        $posts = Blog::orderBy('created_at', 'desc')->paginate(2);
-
-        return view('blog', compact('posts'));
-    }
-
-    public function editor()
-    {
-        return view('blog-editor');
-    }
-
-    public function loader()
-    {
-        return view('blog-loader');
-    }
-
-    public function upload(Request $request)
+    public function upload(Request $request): RedirectResponse
     {
         $file = $request->file('file');
 
