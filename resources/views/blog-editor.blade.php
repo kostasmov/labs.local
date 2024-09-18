@@ -22,10 +22,10 @@
         @csrf
 
         <section>
-            <p><b>Тема: </b>
-                <input id="theme" name="theme" style="width: 30%;" type="text"
-                       class="{{ $errors->has('theme') ? 'error-input' : '' }}"
-                       value="{{ old('theme') }}"></p>
+            <label for="theme">Тема:</label>
+            <input id="theme" name="theme" style="width: 30%;" type="text"
+                   class="{{ $errors->has('theme') ? 'error-input' : '' }}"
+                   value="{{ old('theme') }}">
 
             @if ($errors->has('theme'))
                 <span class="error-message">
@@ -35,15 +35,16 @@
         </section>
 
         <section>
-            <p><b>Изображение:</b>
-            <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png"></p>
+            <label for="image">Изображение:</label>
+            <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png">
         </section>
 
         <section>
-            <p><b>Текст сообщения:</b><br>
-                <textarea id="message" name="message" rows="10" cols="100"
-                          class="{{ $errors->has('message') ? 'error-input' : '' }}">{{ old('message') }}</textarea>
-            </p>
+            <label for="message">Текст сообщения:</label><br>
+            <textarea id="message" name="message" rows="10" cols="100"
+                      class="{{ $errors->has('message') ? 'error-input' : '' }}">
+                {{ old('message') }}
+            </textarea>
 
             @if ($errors->has('message'))
                 <span class="error-message">

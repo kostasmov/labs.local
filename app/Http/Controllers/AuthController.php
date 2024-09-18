@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
+use App\Models\User;
+
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+
 use Illuminate\Http\Request;
+use App\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller
 {
-    private string $adminLogin = 'admin';
-    private string $adminPasswordHash = '$2y$12$7PV5sjFwNYRMCptoO/it4eo1SXsO.0L7Uqban8h69n0hVNp09Xpiy⏎';
-
     public function login_view(): View
     {
         return view('auth.login');
@@ -33,9 +36,13 @@ class AuthController extends Controller
         return redirect()->back()->withErrors("Неверный логин или пароль");
     }
 
-    public function logout()
+    public function logout(Request $request): RedirectResponse
     {
-        return "А-Б-О-Б-А";
+        Auth::logout(); // Выход пользователя
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('index');
     }
 
     public function register_view(): View
@@ -43,9 +50,17 @@ class AuthController extends Controller
         return view('auth.registration');
     }
 
-    public function register(): RedirectResponse
+    public function register(RegisterRequest $request): RedirectResponse
     {
-//        return view('regis');
-    }
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('mail'),
+            'login' => $request->input('login'),
+            'password' => Hash::make($request->input('password')),
+        ]);
 
+        Auth::login($user);
+
+        return redirect()->route('index')->with('success', 'Регистрация прошла успешно');
+    }
 }

@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property bool $is_admin
+ * @method static create(array $array)
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -17,7 +21,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_admin', 'login'
+        'name',
+        'email',
+        'password',
+        'is_admin',
+        'login'
     ];
 
     /**
@@ -40,6 +48,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean'
         ];
     }
 }

@@ -27,10 +27,10 @@
         @csrf
 
         <section>
-            <p><b>Фамилия: </b>
-                <input id="last_name" name="last_name" style="width: 20%;" type="text"
-                       class="{{ $errors->has('last_name') ? 'error-input' : '' }}"
-                       value="{{ old('last_name') }}"></p>
+            <label for="last_name">Фамилия:</label>
+            <input id="last_name" name="last_name" style="width: 20%;" type="text"
+                   class="{{ $errors->has('last_name') ? 'error-input' : '' }}"
+                   value="{{ old('last_name') }}">
 
             @if ($errors->has('last_name'))
                 <span class="error-message">
@@ -40,10 +40,10 @@
         </section>
 
         <section>
-            <p><b>Имя: </b>
+            <label for="first_name">Имя: </label>
             <input id="first_name" name="first_name" style="width: 20%;" type="text"
                    class="{{ $errors->has('first_name') ? 'error-input' : '' }}"
-                   value="{{ old('first_name') }}"></p>
+                   value="{{ old('first_name') }}">
 
             @if ($errors->has('first_name'))
                 <span class="error-message">
@@ -53,10 +53,10 @@
         </section>
 
         <section>
-            <p><b>Отчество: </b>
+            <label for="patronym">Отчество:</label>
             <input id="patronym" name="patronym" style="width: 20%;" type="text"
                    class="{{ $errors->has('patronym') ? 'error-input' : '' }}"
-                   value="{{ old('patronym') }}"></p>
+                   value="{{ old('patronym') }}">
 
             @if ($errors->has('patronym'))
                 <span class="error-message">
@@ -66,11 +66,10 @@
         </section>
 
         <section>
-            <p><b>E-mail: </b>
-                <input id="mail" name="mail" type="email"
-                       class="{{ $errors->has('mail') ? 'error-input' : '' }}"
-                       value="{{ old('mail') }}">
-            </p>
+            <label for="mail">E-mail:</label>
+            <input id="mail" name="mail" type="email"
+                   class="{{ $errors->has('mail') ? 'error-input' : '' }}"
+                   value="{{ old('mail') }}">
 
             @if ($errors->has('mail'))
                 <span class="error-message">
@@ -80,10 +79,11 @@
         </section>
 
         <section>
-            <p><b>Текст отзыва:</b><br>
-                <textarea id="message" name="message" rows="5" cols="60"
-                          class="{{ $errors->has('message') ? 'error-input' : '' }}">{{ old('message') }}</textarea>
-            </p>
+            <label for="message">Текст отзыва:</label><br>
+            <textarea id="message" name="message" rows="5" cols="60"
+                      class="{{ $errors->has('message') ? 'error-input' : '' }}">
+                {{ old('message') }}
+            </textarea>
 
             @if ($errors->has('message'))
                 <span class="error-message">

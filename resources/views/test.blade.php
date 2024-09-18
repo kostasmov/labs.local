@@ -51,13 +51,13 @@
         @csrf
 
         <section>
-            <label for="full_name"><b>Фамилия Имя Отчество:</b></label>
+            <label for="full_name">ФИО:</label>
             <input id="full_name" name="full_name" type="text" style="width: 20%;"
                    class="{{ $errors->has('full_name') ? 'error-input' : '' }}"
                    value="{{ old('full_name') }}">
             <br><br>
 
-            <label for="course"><b>Группа:</b></label>
+            <label for="course">Группа:</label>
             <select name="course" id="course">
                 <optgroup label="3 курс">
                     <option value="ИС/б-22-1-о"
@@ -88,7 +88,9 @@
         </section>
 
         <section>
-            <p><label for="quest1"><b>Вопрос 1:</b> Какая формула описывает закон Ома?</label></p>
+            <p>
+                <label for="quest1">Вопрос 1:</label> Какая формула описывает закон Ома?
+            </p>
             <div>
                 <input type="radio" id="quest1-1" name="quest1" value="1"
                     {{ old('quest1') == '1' ? 'checked' : '' }}>
@@ -108,7 +110,9 @@
         </section>
 
         <section>
-            <p><label for="quest2"><b>Вопрос 2:</b> Что такое сопротивление в электрической цепи?</label></p>
+            <p>
+                <label for="quest2">Вопрос 2:</label> Что такое сопротивление в электрической цепи?
+            </p>
             <select name="quest2" id="quest2">
                 <option value="">Выберите ответ</option>
                 <option value="1" {{ old('quest2') == '1' ? 'selected' : '' }}>
@@ -131,9 +135,13 @@
         </section>
 
         <section>
-            <p><label for="quest3"><b>Вопрос 3:</b> Что такое триггер?</label></p>
+            <p>
+                <label for="quest3">Вопрос 3:</label> Что такое триггер?
+            </p>
             <textarea id="quest3" name="quest3" rows="2" cols="50"
-                      class="{{ $errors->has('quest3') ? 'error-input' : '' }}">{{ old('quest3') }}</textarea>
+                      class="{{ $errors->has('quest3') ? 'error-input' : '' }}">
+                {{ old('quest3') }}
+            </textarea>
             <hr>
         </section>
 

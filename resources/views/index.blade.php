@@ -5,6 +5,11 @@
 @section('content')
     <h1>Главная страница</h1>
 
+    @if(session('success'))
+        <p class="success-box">{{ session('success') }}</p>
+        <hr>
+    @endif
+
     <section>
         <img src="{{ asset('photos/photo.png') }}" style="float: left; margin-right: 20px;"
              width="8%" alt="Фотография" title="Кермит">

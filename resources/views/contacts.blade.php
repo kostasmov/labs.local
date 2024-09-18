@@ -27,7 +27,7 @@
         @csrf
 
         <section>
-            <b>ФИО: </b>
+            <label for="full_name">ФИО:</label>
             <input id="full_name" name="full_name" style="width: 20%;" type="text"
                    class="{{ $errors->has('full_name') ? 'error-input' : '' }}"
                    value="{{ old('full_name') }}">
@@ -40,12 +40,11 @@
         </section>
 
         <section>
-            <p><b>Пол: </b>
+            <label for="sex">Пол:</label>
             <input name="sex" type="radio" value="male"
                 {{ old('sex') == 'male' ? 'checked' : '' }}>Мужской
             <input name="sex" type="radio" value="female"
                 {{ old('sex') == 'female' ? 'checked' : '' }}>Женский
-            </p>
 
             @if ($errors->has('sex'))
                 <span class="error-message">
@@ -55,11 +54,10 @@
         </section>
 
         <section>
-            <p><b>Дата рождения: </b>
+            <label for="birthday">Дата рождения:</label>
             <input id="birthday" name="birthday" title="birthday" type="text"  readonly
                    class="{{ $errors->has('birthday') ? 'error-input' : '' }}"
                    value="{{ old('birthday') }}">
-            </p>
 
             @if ($errors->has('birthday'))
                 <span class="error-message">
@@ -69,10 +67,11 @@
         </section>
 
         <section>
-            <p><b>Телефон: </b>
-            <input id="phone" name="phone" type="text"
-                   class="{{ $errors->has('phone') ? 'error-input' : '' }}"
-                   value="{{ old('phone') }}">
+            <p>
+                <label for="phone">Телефон:</label>
+                <input id="phone" name="phone" type="text"
+                       class="{{ $errors->has('phone') ? 'error-input' : '' }}"
+                       value="{{ old('phone') }}">
             </p>
 
             @if ($errors->has('phone'))
@@ -83,7 +82,7 @@
         </section>
 
         <section>
-            <p><b>Возраст: </b>
+            <label for="age">Возраст:</label>
             <select name="age" id="age">
                 <option value="">Не выбрано</option>
                 <option value="Under 18"
@@ -103,7 +102,6 @@
                     Старше 50 лет
                 </option>
             </select>
-            </p>
 
             @if ($errors->has('age'))
                 <span class="error-message">
@@ -113,11 +111,10 @@
         </section>
 
         <section>
-            <p><b>E-mail: </b>
+            <label for="mail">E-mail:</label>
             <input id="mail" name="mail" type="email"
                    class="{{ $errors->has('mail') ? 'error-input' : '' }}"
                    value="{{ old('mail') }}">
-            </p>
 
             @if ($errors->has('mail'))
                 <span class="error-message">
@@ -127,10 +124,11 @@
         </section>
 
         <section>
-            <p><b>Сообщение:</b><br>
+            <label for="message">Сообщение:</label><br>
             <textarea id="message" name="message" rows="4" cols="50"
-                      class="{{ $errors->has('message') ? 'error-input' : '' }}">{{ old('message') }}</textarea>
-            </p>
+                      class="{{ $errors->has('message') ? 'error-input' : '' }}">
+                {{ old('message') }}
+            </textarea>
 
             @if ($errors->has('message'))
                 <span class="error-message">

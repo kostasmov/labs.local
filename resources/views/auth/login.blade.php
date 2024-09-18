@@ -16,12 +16,12 @@
         @csrf
 
         <div style="margin-bottom: 15px;">
-            <label for="login"><b>Логин:</b></label>
+            <label for="login">Логин:</label>
             <input type="text" name="login" id="login" required>
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="password"><b>Пароль:</b></label>
+            <label for="password">Пароль:</label>
             <input type="password" name="password" id="password" required>
         </div>
 
