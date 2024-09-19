@@ -5,6 +5,11 @@
 @section('content')
     <h1>Вход пользователя</h1>
 
+    @if (session('error'))
+        <p class="error-box">{{ session('error') }}</p>
+        <hr>
+    @endif
+
     @if($errors->any())
         @foreach($errors->all() as $error)
             <div class="error-box">{{ $error }}</div>
