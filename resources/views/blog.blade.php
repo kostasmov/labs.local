@@ -2,6 +2,10 @@
 
 @section('title', 'ЛР: Мой блог')
 
+@php
+    $user = auth()->user();
+@endphp
+
 @section('content')
     <h1>Мой блог</h1>
 
@@ -10,10 +14,12 @@
         <hr>
     @endif
 
-    <section>
-        <a href='{{ route('blog-editor') }}'>Редактор блога</a> /
-        <a href='{{ route('blog-loader') }}'>Загрузка сообщений блога</a>
-    </section>
+    @if (auth()->check() && $user instanceof App\Models\User && $user->is_admin)
+        <section>
+            <a href='{{ route('blog-editor') }}'>Редактор блога</a> /
+            <a href='{{ route('blog-loader') }}'>Загрузка сообщений блога</a>
+        </section>
+    @endif
 
     @if (count($posts) > 0)
         @foreach ($posts as $post)

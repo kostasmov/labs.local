@@ -42,9 +42,7 @@
         <section>
             <label for="message">Текст сообщения:</label><br>
             <textarea id="message" name="message" rows="10" cols="100"
-                      class="{{ $errors->has('message') ? 'error-input' : '' }}">
-                {{ old('message') }}
-            </textarea>
+                      class="{{ $errors->has('message') ? 'error-input' : '' }}">{{ old('message') }}</textarea>
 
             @if ($errors->has('message'))
                 <span class="error-message">

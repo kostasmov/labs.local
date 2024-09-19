@@ -17,6 +17,8 @@ class AdminMiddleware
             return $next($request);
         }
 
-        return redirect('/');
+        session()->flash('error', 'Ошибка прав доступа');
+
+        return redirect()->route('login');
     }
 }

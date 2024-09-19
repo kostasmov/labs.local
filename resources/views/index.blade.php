@@ -10,6 +10,11 @@
         <hr>
     @endif
 
+    @if (session('error'))
+        <p class="error-box">{{ session('error') }}</p>
+        <hr>
+    @endif
+
     <section>
         <img src="{{ asset('photos/photo.png') }}" style="float: left; margin-right: 20px;"
              width="8%" alt="Фотография" title="Кермит">

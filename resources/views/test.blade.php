@@ -1,3 +1,5 @@
+@php use App\Models\User; @endphp
+
 @extends('layouts.app')
 
 @section('title', 'ЛР: Тест по дисциплине "Основы электротехники и электроники"')
@@ -14,32 +16,42 @@
             location.reload();
         }
     </script>
+
+    @php
+        $user = auth()->user();
+
+        if (auth()->check() && $user instanceof User) {
+            $fullName = $user->name;
+            $is_admin = $user->is_admin;
+        }
+    @endphp
 @endsection
 
 @section('content')
     <h1>Тест по дисциплине "Основы электротехники и электроники"</h1>
 
-    @if(session('success'))
-        <p class="success-box">{{ session('success') }}</p>
-        <hr>
-    @elseif(old('quest1') && old('quest2') && old('quest3') && !$errors->has('full_name'))
-        @if($errors->has('quest1'))
-            <p class="error-box">{{ $errors->first('quest1') }}</p>
-        @else
-            <p class="success-box">Ответ 1 правильный</p>
-        @endif
+    @if(old('quest1') && old('quest2') && old('quest3') && !$errors->has('full_name'))
+        @auth
+            @if($errors->has('quest1'))
+                <p class="error-box">{{ $errors->first('quest1') }}</p>
+            @else
+                <p class="success-box">Ответ 1 правильный</p>
+            @endif
 
-        @if($errors->has('quest2'))
-            <p class="error-box">{{ $errors->first('quest2') }}</p>
-        @else
-            <p class="success-box">Ответ 2 правильный</p>
-        @endif
+            @if($errors->has('quest2'))
+                <p class="error-box">{{ $errors->first('quest2') }}</p>
+            @else
+                <p class="success-box">Ответ 2 правильный</p>
+            @endif
 
-        @if($errors->has('quest3'))
-            <p class="error-box">{{ $errors->first('quest3') }}</p><hr>
+            @if($errors->has('quest3'))
+                <p class="error-box">{{ $errors->first('quest3') }}</p><hr>
+            @else
+                <p class="success-box">Ответ 3 правильный</p><hr>
+            @endif
         @else
-            <p class="success-box">Ответ 3 правильный</p><hr>
-        @endif
+            <p class="info-box">Тест отправлен на проверку</p><hr>
+        @endauth
     @elseif($errors->any())
         @foreach($errors->all() as $error)
             <p class="error-box">{{ $error }}</p>
@@ -54,7 +66,8 @@
             <label for="full_name">ФИО:</label>
             <input id="full_name" name="full_name" type="text" style="width: 20%;"
                    class="{{ $errors->has('full_name') ? 'error-input' : '' }}"
-                   value="{{ old('full_name') }}">
+                   value="{{ auth()->check() ? $fullName : old('full_name') }}"
+                {{ auth()->check() ? 'readonly' : '' }}>
             <br><br>
 
             <label for="course">Группа:</label>
@@ -139,9 +152,7 @@
                 <label for="quest3">Вопрос 3:</label> Что такое триггер?
             </p>
             <textarea id="quest3" name="quest3" rows="2" cols="50"
-                      class="{{ $errors->has('quest3') ? 'error-input' : '' }}">
-                {{ old('quest3') }}
-            </textarea>
+                      class="{{ $errors->has('quest3') ? 'error-input' : '' }}">{{ old('quest3') }}</textarea>
             <hr>
         </section>
 
@@ -151,7 +162,8 @@
         </section>
     </form>
 
-    @if (count($results) > 0)
+
+    @if (count($results) > 0 && auth()->check() && $is_admin)
         <hr>
         <table>
             <thead>

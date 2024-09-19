@@ -1,3 +1,5 @@
+@php use App\Models\User; @endphp
+
 @extends('layouts.app')
 
 @section('title', 'ЛР: Контакт')
@@ -13,6 +15,15 @@
             location.reload();
         }
     </script>
+
+    @php
+        $user = auth()->user();
+
+        if (auth()->check() && $user instanceof User) {
+            $fullName = $user->name;
+            $email = $user->email;
+        }
+    @endphp
 @endsection
 
 @section('content')
@@ -30,7 +41,8 @@
             <label for="full_name">ФИО:</label>
             <input id="full_name" name="full_name" style="width: 20%;" type="text"
                    class="{{ $errors->has('full_name') ? 'error-input' : '' }}"
-                   value="{{ old('full_name') }}">
+                   value="{{ auth()->check() ? $fullName : old('full_name') }}"
+                {{ auth()->check() ? 'readonly' : '' }}>
 
             @if ($errors->has('full_name'))
                 <span class="error-message">
@@ -114,7 +126,8 @@
             <label for="mail">E-mail:</label>
             <input id="mail" name="mail" type="email"
                    class="{{ $errors->has('mail') ? 'error-input' : '' }}"
-                   value="{{ old('mail') }}">
+                   value="{{ auth()->check() ? $email : old('email') }}"
+                {{ auth()->check() ? 'readonly' : '' }}>
 
             @if ($errors->has('mail'))
                 <span class="error-message">
@@ -126,9 +139,7 @@
         <section>
             <label for="message">Сообщение:</label><br>
             <textarea id="message" name="message" rows="4" cols="50"
-                      class="{{ $errors->has('message') ? 'error-input' : '' }}">
-                {{ old('message') }}
-            </textarea>
+                      class="{{ $errors->has('message') ? 'error-input' : '' }}">{{ old('message') }}</textarea>
 
             @if ($errors->has('message'))
                 <span class="error-message">

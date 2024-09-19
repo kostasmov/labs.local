@@ -18,6 +18,12 @@
     </script>
 
     <main>
+        <div class="user-info">
+            @auth
+                Пользователь: {{ Auth::user()->name }}
+            @endauth
+        </div>
+
         @yield('content')
     </main>
 

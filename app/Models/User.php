@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @property bool $is_admin
+ * @property string $name
+ * @property string $email
  * @method static create(array $array)
  */
 class User extends Authenticatable

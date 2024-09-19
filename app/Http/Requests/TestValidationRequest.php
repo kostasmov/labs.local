@@ -14,7 +14,7 @@ class TestValidationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'full_name' => 'required|regex:/^[А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+$/u',
+            'full_name' => 'required|regex:/^[А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+(?: [А-ЯЁ][а-яё]+)?$/u',
             'course' => 'required',
             'quest1' => 'required',
             'quest2' => 'required',

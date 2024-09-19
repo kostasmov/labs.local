@@ -14,7 +14,7 @@ class ContactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'full_name' => 'required|regex:/^[А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+$/u',
+            'full_name' => 'required|regex:/^[А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+(?: [А-ЯЁ][а-яё]+)?$/u',
             'sex' => 'required',
             'birthday' => 'required|before:today',
             'phone' => 'required|regex:/^\+?[0-9]{10,15}$/',

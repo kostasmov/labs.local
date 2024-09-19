@@ -33,19 +33,19 @@ Route::middleware([LogVisitor::class])->group(function () {
     Route::get('/contacts', [ContactsController::class,'index'])->name('contacts');
     Route::get('/test', [TestController::class,'index'])->name('test');
     Route::get('/guestbook', [GuestbookController::class,'index'])->name('guestbook');
-
     Route::get('/blog', [BlogController::class,'index'])->name('blog');
-    Route::get('/blog/editor', [BlogController::class,'editor'])->name('blog-editor');
 });
 
 Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/visitor-stats', [VisitorStatsController::class,'index'])->name('visitor-stats');
 
-    Route::get('/guestbook/loader', [GuestbookController::class,'loader'])->name('guestbook-loader');
     Route::get('/blog/loader', [BlogController::class,'loader'])->name('blog-loader');
-
-    Route::post('/guestbook/upload', [GuestbookController::class,'upload'])->name('guestbook-upload');
+    Route::get('/blog/editor', [BlogController::class,'editor'])->name('blog-editor');
+    Route::post('/blog/submit', [BlogController::class,'submit'])->name('blog-form');
     Route::post('/blog/upload', [BlogController::class,'upload'])->name('blog-upload');
+
+    Route::get('/guestbook/loader', [GuestbookController::class,'loader'])->name('guestbook-loader');
+    Route::post('/guestbook/upload', [GuestbookController::class,'upload'])->name('guestbook-upload');
 });
 
 Route::get('/login', [AuthController::class,'login_view'])->name('login');
@@ -57,6 +57,4 @@ Route::post('/register', [AuthController::class,'register']);
 
 Route::post('/test/submit', [TestController::class,'submit'])->name('test-form');
 Route::post('/contacts/submit', [ContactsController::class,'submit'])->name('contact-form');
-
-Route::post('/blog/submit', [BlogController::class,'submit'])->name('blog-form');
 Route::post('/guestbook/submit', [GuestbookController::class,'submit'])->name('guestbook-form');
