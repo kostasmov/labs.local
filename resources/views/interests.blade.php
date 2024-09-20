@@ -3,46 +3,46 @@
 @section('title', 'ЛР: Мои интересы')
 
 @section('content')
-<h1>Мои интересы</h1>
-<h2>Допустим, мне нравится изучать природу</h2>
+    <h1>Мои интересы</h1>
+    <h2>Допустим, мне нравится изучать природу</h2>
 
-<section>
-    <b>Содержание</b>:
-{{--    <a href="#winter">Зима</a> /--}}
-{{--    <a href="#spring">Весна</a> /--}}
-{{--    <a href="#summer">Лето</a> /--}}
-{{--    <a href="#autumn">Осень</a>--}}
-    @foreach ($seasons as $key => $season)
-        <a href="#{{ $key }}">{{ $season['title'] }}</a> /
-    @endforeach
-</section>
-
-<section>
-    <ol>
+    <section>
+        <b>Содержание</b>:
+    {{--    <a href="#winter">Зима</a> /--}}
+    {{--    <a href="#spring">Весна</a> /--}}
+    {{--    <a href="#summer">Лето</a> /--}}
+    {{--    <a href="#autumn">Осень</a>--}}
         @foreach ($seasons as $key => $season)
-            @if (isset($season['image']))
-                <div class="image-wrapper">
-                    <img src="{{ asset($season['image']['src']) }}" width="{{ $season['image']['width'] }}" title="{{ $season['image']['title'] }}" alt="{{ $season['image']['alt'] }}">
-                </div>
-            @endif
-
-            <li>
-                <p id="{{ $key }}" class="linkable">
-                <b>{{ $season['title'] }}</b> — {{ $season['description'] }}</p>
-
-                @if (isset($season['subseasons']))
-                    <ol>
-                        @foreach ($season['subseasons'] as $subseason)
-                            <li>
-                                <p><b>{{ $subseason['title'] }}</b> ({{ $subseason['period'] }}).
-                                    {{ $subseason['description'] }}</p>
-                            </li>
-                        @endforeach
-                    </ol>
-                @endif
-            </li>
+            <a href="#{{ $key }}">{{ $season['title'] }}</a> /
         @endforeach
-    </ol>
+    </section>
+
+    <section>
+        <ol>
+            @foreach ($seasons as $key => $season)
+                @if (isset($season['image']))
+                    <div class="image-wrapper">
+                        <img src="{{ asset($season['image']['src']) }}" width="{{ $season['image']['width'] }}" title="{{ $season['image']['title'] }}" alt="{{ $season['image']['alt'] }}">
+                    </div>
+                @endif
+
+                <li>
+                    <p id="{{ $key }}" class="linkable">
+                    <b>{{ $season['title'] }}</b> — {{ $season['description'] }}</p>
+
+                    @if (isset($season['subseasons']))
+                        <ol>
+                            @foreach ($season['subseasons'] as $subseason)
+                                <li>
+                                    <p><b>{{ $subseason['title'] }}</b> ({{ $subseason['period'] }}).
+                                        {{ $subseason['description'] }}</p>
+                                </li>
+                            @endforeach
+                        </ol>
+                    @endif
+                </li>
+            @endforeach
+        </ol>
 
 {{--    <ol>--}}
 {{--        <li>--}}
@@ -144,24 +144,24 @@
 {{--            </ul>--}}
 {{--        </li>--}}
 {{--    </ol>--}}
-</section>
+    </section>
 
-<section>
-    <div>
-        <p><b>Последние просмотренные фильмы:</b></p>
-        <ul>
-            @foreach($films as $film)
-                    <li>{{ $film }}</li>
-            @endforeach
-        </ul>
-    </div>
-    <div>
-        <p><b>Последние добавленные альбомы:</b></p>
-        <ul>
-            @foreach($albums as $album)
-                <li>{{ $album }}</li>
-            @endforeach
-        </ul>
-    </div>
-</section>
+    <section>
+        <div>
+            <p><b>Последние просмотренные фильмы:</b></p>
+            <ul>
+                @foreach($films as $film)
+                        <li>{{ $film }}</li>
+                @endforeach
+            </ul>
+        </div>
+        <div>
+            <p><b>Последние добавленные альбомы:</b></p>
+            <ul>
+                @foreach($albums as $album)
+                    <li>{{ $album }}</li>
+                @endforeach
+            </ul>
+        </div>
+    </section>
 @endsection
