@@ -5,9 +5,7 @@
 <header id="main-header">
     <ul>
         <li><a href="{{ route('index') }}"><img width="25px" src="{{ asset('photos/logo.png') }}" alt="Логотип"></a></li>
-{{--            <li><a href="{{ route('about-me') }}">Обо мне</a></li>--}}
         <li><a href="{{ route('interests') }}">Мои интересы</a></li>
-{{--            <li><a href="{{ route('study') }}">Учеба</a></li>--}}
         <li><a href="{{ route('album') }}">Фотоальбом</a></li>
         <li><a href="{{ route('contacts') }}">Контакт</a></li>
         <li><a href="{{ route('test') }}">Тест</a></li>

@@ -25,5 +25,5 @@
 @endsection
 
 @section('foot-scripts')
-    <script src="{{ asset('scripts/photos-table.js') }}"></script>
+    @vite(['resources/js/photos-table.js'])
 @endsection

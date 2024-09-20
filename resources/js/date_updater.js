@@ -1,9 +1,8 @@
 const monthNames = [
-  "января", "февраля", "марта", "апреля", "мая", "июня",
-  "июля", "августа", "сентября", "октября", "ноября", "декабря"
+    "января", "февраля", "марта", "апреля", "мая", "июня",
+    "июля", "августа", "сентября", "октября", "ноября", "декабря"
 ];
 
-// Обновление даты и времени в навигационной панели
 function updateDateTime() {
     let now = new Date();
 
@@ -22,3 +21,5 @@ function updateDateTime() {
         dateTimeElement.textContent = dateTimeString;
     }
 }
+
+window.updateDateTime = updateDateTime;

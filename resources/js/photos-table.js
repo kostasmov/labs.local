@@ -10,8 +10,10 @@ function showImageModal(src, alt) {
   modal.appendChild(img);
   document.body.appendChild(modal);
 
-  // Закрыть модальное окно по нажатию
   modal.addEventListener('click', function() {
       document.body.removeChild(modal);
   });
 }
+
+window.showImageModal = showImageModal;
+

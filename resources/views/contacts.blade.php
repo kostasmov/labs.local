@@ -155,5 +155,5 @@
 @endsection
 
 @section('foot-scripts')
-    <script src="{{ asset('scripts/calendar.js') }}"></script>
+    @vite(['resources/js/calendar.js'])
 @endsection

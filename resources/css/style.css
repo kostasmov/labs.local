@@ -94,7 +94,6 @@ header {
 
     color: rgb(173, 173, 173);
     font-family: sans-serif;
-    font-weight: bold;
     font-size: 15px;
 
     text-decoration: none;
@@ -103,6 +102,9 @@ header {
 #main-header ul a:hover,
 #logout-btn:hover {
     color: #ffffff;
+}
+.auth-buttons {
+    font-weight: bold;
 }
 #currentDateTime {
     text-align: right;

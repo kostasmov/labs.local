@@ -3,9 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <title>@yield('title', 'Название страницы')</title>
-    <script src="{{ asset('scripts/date_updater.js') }}"></script>
+
+{{--    <link rel="stylesheet" href="{{ asset('css/style.css') }}">--}}
+    {{--    <script src="{{ asset('scripts/date_updater.js') }}"></script>--}}
+
+    @vite(['resources/css/style.css'])
+    @vite(['resources/js/date_updater.js'])
+
     @yield('head-scripts')
 </head>
 
@@ -13,8 +18,10 @@
     @include('partials.navbar')
 
     <script>
-        updateDateTime();
-        setInterval(updateDateTime, 1000);
+        window.onload = function() {
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+        };
     </script>
 
     <main>
