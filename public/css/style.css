@@ -86,11 +86,22 @@ header {
     display: flex;
     align-items: center;
 }
-#main-header ul a {
-    text-decoration: none;
+#main-header ul a,
+#logout-btn {
+    background: none;
+    border: none;
+    padding: 0;
+
     color: rgb(173, 173, 173);
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+
+    text-decoration: none;
+    cursor: pointer;
 }
-#main-header ul a:hover {
+#main-header ul a:hover,
+#logout-btn:hover {
     color: #ffffff;
 }
 #currentDateTime {
@@ -104,6 +115,11 @@ header {
 .error-message {
     display: block;
     color: red;
+    margin-top: 5px;
+}
+.success-message {
+    display: block;
+    color: green;
     margin-top: 5px;
 }
 .error-input {

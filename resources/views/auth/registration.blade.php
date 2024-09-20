@@ -38,13 +38,13 @@
             <label for="login">Логин:</label>
             <input id="login" name="login" style="width: 20%;" type="text"
                    class="{{ $errors->has('login') ? 'error-input' : '' }}"
-                   value="{{ old('login') }}">
+                   value="{{ old('login') }}" onblur="checkLogin()">
 
-            @if ($errors->has('login'))
-                <span class="error-message">
+            <span id="login-status" class="error-message">
+                @if ($errors->has('login'))
                     {{ $errors->first('login') }}
-                </span>
-            @endif
+                @endif
+            </span>
         </section>
 
         <section>
@@ -61,4 +61,39 @@
 
         <input type="submit" value="Войти">
     </form>
+@endsection
+
+@section('foot-scripts')
+    <script>
+        function checkLogin() {
+            /**
+             * @type {HTMLInputElement}
+             */
+            const loginInput = document.getElementById('login');
+            const login = loginInput.value.trim();
+
+            /**
+             * @type {HTMLElement}
+             */
+            const loginStatus = document.getElementById('login-status');
+
+            if (login === "") {
+                loginStatus.textContent = 'Не указан логин';
+                return;
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('post', '{{ route("check-login") }}');
+            xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    loginStatus.innerHTML = xhr.responseText;
+                }
+            };
+
+            xhr.send('login=' + encodeURIComponent(login));
+        }
+    </script>
 @endsection

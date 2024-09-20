@@ -1,4 +1,3 @@
-// Открытие изображения в модальном окне
 function showImageModal(src, alt) {
   let modal = document.createElement("div");
   modal.classList.add("modal");

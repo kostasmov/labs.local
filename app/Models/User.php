@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string $name
  * @property string $email
  * @method static create(array $array)
+ * @method static where(string $string, mixed $login)
  */
 class User extends Authenticatable
 {

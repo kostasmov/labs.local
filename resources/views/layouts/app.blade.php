@@ -18,11 +18,11 @@
     </script>
 
     <main>
-        <div class="user-info">
-            @auth
+        @auth
+            <div class="user-info">
                 Пользователь: {{ Auth::user()->name }}
-            @endauth
-        </div>
+            </div>
+        @endauth
 
         @yield('content')
     </main>

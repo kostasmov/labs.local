@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
@@ -43,6 +44,18 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
+    }
+
+    public function check_login(request $request)
+    {
+        $login = $request->input('login');
+        $user = User::where('login', $login)->first();
+
+        if ($user) {
+            return response('<p class="error-message">Логин уже используется</p>');
+        } else {
+            return response('<p class="success-message">Логин свободен</p>');
+        }
     }
 
     public function register_view(): View

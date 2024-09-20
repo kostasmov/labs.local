@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AlbumController;
@@ -50,7 +53,8 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 
 Route::get('/login', [AuthController::class,'login_view'])->name('login');
 Route::post('/login', [AuthController::class,'login']);
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/check-login', [AuthController::class,'check_login'])->name('check-login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/register', [AuthController::class,'register_view'])->name('register');
 Route::post('/register', [AuthController::class,'register']);

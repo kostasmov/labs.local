@@ -23,10 +23,15 @@
 
     <ul class="auth-buttons">
         @guest
-            <li><a href="{{ route('login') }}"><b>Войти</b></a></li>
-            <li><a href="{{ route('register') }}"><b>Регистрация</b></a></li>
+            <li><a href="{{ route('login') }}">Войти</a></li>
+            <li><a href="{{ route('register') }}">Регистрация</a></li>
         @else
-            <li><a href="{{ route('logout') }}"><b>Выйти</b></a></li>
+            <li>
+                <form id="logout-form" action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <input type="submit" id="logout-btn" value="Выйти">
+                </form>
+            </li>
         @endguest
     </ul>
 </header>
