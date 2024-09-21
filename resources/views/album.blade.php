@@ -13,7 +13,6 @@
                             src="{{ $photos[$j] }}"
                             alt="{{ $titles[$j] }}"
                             title="{{ $titles[$j] }}"
-                            style="cursor: pointer;"
                             onclick="showImageModal('{{ $photos[$j] }}', '{{ $titles[$j] }}')"
                         />
                         <div class="caption">{{ $titles[$j] }}</div>

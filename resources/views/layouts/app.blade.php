@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <title>@yield('title', 'Название страницы')</title>
 
-    @vite(['resources/css/style.css'])
+{{--    @vite(['resources/css/style.css'])--}}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @vite(['resources/js/date_updater.js'])
 
     @yield('head-scripts')

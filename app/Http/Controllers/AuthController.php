@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\View\View;
+use Illuminate\Http\Response;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\JsonResponse;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
@@ -39,14 +39,14 @@ class AuthController extends Controller
 
     public function logout(Request $request): RedirectResponse
     {
-        Auth::logout(); // Выход пользователя
+        Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
     }
 
-    public function check_login(request $request)
+    public function check_login(request $request): Response
     {
         $login = $request->input('login');
         $user = User::where('login', $login)->first();

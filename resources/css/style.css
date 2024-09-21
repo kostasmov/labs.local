@@ -1,305 +1,305 @@
-main {
-    padding-top: 45px;
-    padding-left: 50px;
-    padding-right: 50px;
-    font-size: 15px;
-    font-family: sans-serif;
-}
-h1 {
-    font-size: 25px;
-    text-align: center;
-}
-h2 {
-    font-size: 15px;
-    text-align: center;
-}
-span {
-    margin-top: 10px;
-}
-.linkable {
-    scroll-margin-top: 55px;
-}
-.image-wrapper {
-    float: right;
-    margin-left: 10px;
-}
-table {
-    border-collapse: collapse;
-    width: 100%;
-    color: #000000;
-    font-family: sans-serif;
-    font-size: 15px;
-    margin-bottom: 5px;
-}
-th, td {
-    border: 1px solid #000000;
-    padding: 5px;
-    text-align: left;
-}
-.study-table {
-    font-weight: bold;
-}
-label {
-    font-weight: bold;
-}
-input + label {
-    font-weight: normal;
-}
-section {
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-.user-info {
-    position: fixed;
-    top: 60px;
-    right: 15px;
-    font-size: 14px;
-    background-color: #f5f5f5;
-    padding: 5px 10px;
-}
+/*main {*/
+/*    padding-top: 45px;*/
+/*    padding-left: 50px;*/
+/*    padding-right: 50px;*/
+/*    font-size: 15px;*/
+/*    font-family: sans-serif;*/
+/*}*/
+/*h1 {*/
+/*    font-size: 25px;*/
+/*    text-align: center;*/
+/*}*/
+/*h2 {*/
+/*    font-size: 15px;*/
+/*    text-align: center;*/
+/*}*/
+/*span {*/
+/*    margin-top: 10px;*/
+/*}*/
+/*.linkable {*/
+/*    scroll-margin-top: 55px;*/
+/*}*/
+/*.image-wrapper {*/
+/*    float: right;*/
+/*    margin-left: 10px;*/
+/*}*/
+/*table {*/
+/*    border-collapse: collapse;*/
+/*    width: 100%;*/
+/*    color: #000000;*/
+/*    font-family: sans-serif;*/
+/*    font-size: 15px;*/
+/*    margin-bottom: 5px;*/
+/*}*/
+/*th, td {*/
+/*    border: 1px solid #000000;*/
+/*    padding: 5px;*/
+/*    text-align: left;*/
+/*}*/
+/*.study-table {*/
+/*    font-weight: bold;*/
+/*}*/
+/*label {*/
+/*    font-weight: bold;*/
+/*}*/
+/*input + label {*/
+/*    font-weight: normal;*/
+/*}*/
+/*section {*/
+/*    margin-top: 15px;*/
+/*    margin-bottom: 15px;*/
+/*}*/
+/*.user-info {*/
+/*    position: fixed;*/
+/*    top: 60px;*/
+/*    right: 15px;*/
+/*    font-size: 14px;*/
+/*    background-color: #f5f5f5;*/
+/*    padding: 5px 10px;*/
+/*}*/
 
 
-/* Навигационная панель */
-header {
-    font-family: sans-serif;
-    font-size: 15px;
-    background-color: #000000;
-}
-#main-header {
-    top: 0;
-    left: 0;
-    right: 0;
-    position: fixed;
+/*!* Навигационная панель *!*/
+/*header {*/
+/*    font-family: sans-serif;*/
+/*    font-size: 15px;*/
+/*    background-color: #000000;*/
+/*}*/
+/*#main-header {*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    position: fixed;*/
 
-    display: flex;
-    justify-content: space-between;
+/*    display: flex;*/
+/*    justify-content: space-between;*/
 
-    height: 50px;
-    padding-right: 30px;
-    padding-left: 30px;
-}
-#main-header ul {
-    list-style-type: none;
-    padding: 0;
-    gap: 15px;
+/*    height: 50px;*/
+/*    padding-right: 30px;*/
+/*    padding-left: 30px;*/
+/*}*/
+/*#main-header ul {*/
+/*    list-style-type: none;*/
+/*    padding: 0;*/
+/*    gap: 15px;*/
 
-    display: flex;
-    align-items: center;
-}
-#main-header ul a,
-#logout-btn {
-    background: none;
-    border: none;
-    padding: 0;
+/*    display: flex;*/
+/*    align-items: center;*/
+/*}*/
+/*#main-header ul a,*/
+/*#logout-btn {*/
+/*    background: none;*/
+/*    border: none;*/
+/*    padding: 0;*/
 
-    color: rgb(173, 173, 173);
-    font-family: sans-serif;
-    font-size: 15px;
+/*    color: rgb(173, 173, 173);*/
+/*    font-family: sans-serif;*/
+/*    font-size: 15px;*/
 
-    text-decoration: none;
-    cursor: pointer;
-}
-#main-header ul a:hover,
-#logout-btn:hover {
-    color: #ffffff;
-}
-.auth-buttons {
-    font-weight: bold;
-}
-#currentDateTime {
-    text-align: right;
-    color: white;
-    font-weight: bold;
-}
-
-
-/* Проверка заполнения форм */
-.error-message {
-    display: block;
-    color: red;
-    margin-top: 5px;
-}
-.success-message {
-    display: block;
-    color: green;
-    margin-top: 5px;
-}
-.error-input {
-    border: 1px solid red;
-}
-.error-box {
-    background-color: rgba(255, 45, 32, 0.65);
-    padding: 3px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-}
-.success-box {
-    background-color: rgb(36, 221, 0);
-    padding: 3px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-}
-.info-box {
-    background-color: #a0aec0;
-    padding: 3px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-}
-.bg-success {
-    background-color: rgb(36, 221, 0);
-    /*color: #155724;*/
-}
-.bg-error {
-    background-color: rgba(255, 45, 32, 0.65);
-    /*color: #721c24;*/
-}
+/*    text-decoration: none;*/
+/*    cursor: pointer;*/
+/*}*/
+/*#main-header ul a:hover,*/
+/*#logout-btn:hover {*/
+/*    color: #ffffff;*/
+/*}*/
+/*.auth-buttons {*/
+/*    font-weight: bold;*/
+/*}*/
+/*#currentDateTime {*/
+/*    text-align: right;*/
+/*    color: white;*/
+/*    font-weight: bold;*/
+/*}*/
 
 
-/* Календарь */
-.calendar {
-    text-decoration: none;
-    color: #000000;
-    font-size: 15px;
-    font-family: sans-serif;
-    background: rgb(255, 255, 255);
-    position: absolute;
-    top: 100%;
-    display: none;
-    padding: 5px;
-    width: 300px;
-}
-.calendar--active {
-    display: block;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-.calendar__days {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-}
-.calendar__day {
-    font-weight: bold;
-    padding-right: 5px;
-    color: #000000;
-}
-.calendar__day, .calendar__date {
-    transition: 0.1s;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgb(255, 255, 255);
-}
-.calendar__date:not(.calendar__date--empty):hover {
-    background: #000000;
-    color: #ffffff;
-}
-.calendar__date {
-    cursor: pointer;
-}
-.calendar__dates {
-    display: grid;
-    gap: 0;
-    grid-template-columns: repeat(7, 1fr);
-    margin-left: 5px;
-}
-.calendar__date--empty {
-    cursor: auto;
-    background: transparent;
-}
-.calendar__header {
-    display: flex;
-    gap: 5px;
-    justify-content: center;
-    padding: 5px;
-    margin-bottom: 10px;
-}
+/*!* Проверка заполнения форм *!*/
+/*.error-message {*/
+/*    display: block;*/
+/*    color: red;*/
+/*    margin-top: 5px;*/
+/*}*/
+/*.success-message {*/
+/*    display: block;*/
+/*    color: green;*/
+/*    margin-top: 5px;*/
+/*}*/
+/*.error-input {*/
+/*    border: 1px solid red;*/
+/*}*/
+/*.error-box {*/
+/*    background-color: rgba(255, 45, 32, 0.65);*/
+/*    padding: 3px;*/
+/*    margin-bottom: 5px;*/
+/*    margin-top: 5px;*/
+/*}*/
+/*.success-box {*/
+/*    background-color: rgb(36, 221, 0);*/
+/*    padding: 3px;*/
+/*    margin-bottom: 5px;*/
+/*    margin-top: 5px;*/
+/*}*/
+/*.info-box {*/
+/*    background-color: #a0aec0;*/
+/*    padding: 3px;*/
+/*    margin-bottom: 5px;*/
+/*    margin-top: 5px;*/
+/*}*/
+/*.bg-success {*/
+/*    background-color: rgb(36, 221, 0);*/
+/*    !*color: #155724;*!*/
+/*}*/
+/*.bg-error {*/
+/*    background-color: rgba(255, 45, 32, 0.65);*/
+/*    !*color: #721c24;*!*/
+/*}*/
 
 
-/* Фотоальбом */
-#photo-album {
-    display: flex;
-    flex-wrap: wrap;
-}
-.row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-.photo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 40px;
-}
-.photo-container img {
-    width: 100%;
-    max-width: 180px;
-    height: auto;
-    object-fit: cover;
-    margin-bottom: 10px;
-}
-.caption {
-    text-align: center;
-    font-size: 15px;
-    font-weight: bold;
-}
+/*!* Календарь *!*/
+/*.calendar {*/
+/*    text-decoration: none;*/
+/*    color: #000000;*/
+/*    font-size: 15px;*/
+/*    font-family: sans-serif;*/
+/*    background: rgb(255, 255, 255);*/
+/*    position: absolute;*/
+/*    top: 100%;*/
+/*    display: none;*/
+/*    padding: 5px;*/
+/*    width: 300px;*/
+/*}*/
+/*.calendar--active {*/
+/*    display: block;*/
+/*    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);*/
+/*}*/
+/*.calendar__days {*/
+/*    display: flex;*/
+/*    width: 100%;*/
+/*    justify-content: space-between;*/
+/*}*/
+/*.calendar__day {*/
+/*    font-weight: bold;*/
+/*    padding-right: 5px;*/
+/*    color: #000000;*/
+/*}*/
+/*.calendar__day, .calendar__date {*/
+/*    transition: 0.1s;*/
+/*    width: 36px;*/
+/*    height: 36px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    background: rgb(255, 255, 255);*/
+/*}*/
+/*.calendar__date:not(.calendar__date--empty):hover {*/
+/*    background: #000000;*/
+/*    color: #ffffff;*/
+/*}*/
+/*.calendar__date {*/
+/*    cursor: pointer;*/
+/*}*/
+/*.calendar__dates {*/
+/*    display: grid;*/
+/*    gap: 0;*/
+/*    grid-template-columns: repeat(7, 1fr);*/
+/*    margin-left: 5px;*/
+/*}*/
+/*.calendar__date--empty {*/
+/*    cursor: auto;*/
+/*    background: transparent;*/
+/*}*/
+/*.calendar__header {*/
+/*    display: flex;*/
+/*    gap: 5px;*/
+/*    justify-content: center;*/
+/*    padding: 5px;*/
+/*    margin-bottom: 10px;*/
+/*}*/
 
 
-/* Модальное окно для фотоальбома */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-.modal-content {
-    max-width: 100%;
-    max-height: 100%;
-}
-.modal-content img {
-    max-width: 60%;
-    max-height: 60%;
-    object-fit: contain;
-}
+/*!* Фотоальбом *!*/
+/*#photo-album {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+/*.row {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    margin-bottom: 20px;*/
+/*}*/
+/*.photo-container {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    margin-right: 40px;*/
+/*}*/
+/*.photo-container img {*/
+/*    width: 100%;*/
+/*    max-width: 180px;*/
+/*    height: auto;*/
+/*    object-fit: cover;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+/*.caption {*/
+/*    text-align: center;*/
+/*    font-size: 15px;*/
+/*    font-weight: bold;*/
+/*}*/
 
 
-/* Записи блога */
-.blog {
-    background-color: #dcdcdc;
-    padding: 1% 3%;
-    margin-top: 20px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-.blog h1 {
-    text-align: justify;
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-.blog p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #4a5568;
-}
-.blog img {
-    max-width: 15%;
-    height: auto;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-.blog .blog-datetime {
-    text-align: left;
-    font-size: 12px;
-    color: #718096;
-    font-style: italic;
-    margin-top: 10px;
-}
+/*!* Модальное окно для фотоальбома *!*/
+/*.modal {*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    background-color: rgba(0, 0, 0, 0.8);*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    z-index: 9999;*/
+/*}*/
+/*.modal-content {*/
+/*    max-width: 100%;*/
+/*    max-height: 100%;*/
+/*}*/
+/*.modal-content img {*/
+/*    max-width: 60%;*/
+/*    max-height: 60%;*/
+/*    object-fit: contain;*/
+/*}*/
+
+
+/*!* Записи блога *!*/
+/*.blog {*/
+/*    background-color: #dcdcdc;*/
+/*    padding: 1% 3%;*/
+/*    margin-top: 20px;*/
+/*    margin-bottom: 25px;*/
+/*    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);*/
+/*}*/
+/*.blog h1 {*/
+/*    text-align: justify;*/
+/*    font-size: 18px;*/
+/*    font-weight: 600;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+/*.blog p {*/
+/*    font-size: 15px;*/
+/*    line-height: 1.6;*/
+/*    color: #4a5568;*/
+/*}*/
+/*.blog img {*/
+/*    max-width: 15%;*/
+/*    height: auto;*/
+/*    margin-top: 0;*/
+/*    margin-bottom: 0;*/
+/*}*/
+/*.blog .blog-datetime {*/
+/*    text-align: left;*/
+/*    font-size: 12px;*/
+/*    color: #718096;*/
+/*    font-style: italic;*/
+/*    margin-top: 10px;*/
+/*}*/
