@@ -24,17 +24,17 @@
     @if (count($posts) > 0)
         @foreach ($posts as $post)
             <div class="blog">
-                <h1>{!! $post->theme !!}</h1>
+                <h1>{!! nl2br(e(base64_decode($post->theme))) !!}</h1>
 
                 <section>
-                    <p>{!! $post->message !!}</p>
+                    <p>{!! nl2br(e(base64_decode($post->message))) !!}</p>
 
                     @if($post->image)
                         <img src="{{ asset('storage/' . $post->image) }}" alt="Изображение поста">
                     @endif
                 </section>
 
-                <p class="blog-datetime">{{ $post->created_at }}</p>
+                <p class="blog-datetime">{{ $post->created_at->format('d.m.Y H:i') }}</p>
 
                 @if(auth()->check())
                     <button class="comment-btn" onclick="openCommentModal({{ $post->id }})">

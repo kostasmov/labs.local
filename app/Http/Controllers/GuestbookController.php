@@ -53,7 +53,7 @@ class GuestbookController extends Controller
         $formattedMessage = "{$validated['last_name']};{$validated['first_name']};" .
             ($request['patronym'] ?? '') .
             ";{$validated['mail']};" . base64_encode($validated['message']) .
-            ";{$currentDateTime}";
+            ";$currentDateTime";
 
         if (Storage::size($filePath) == 0) {
             Storage::put($filePath, $formattedMessage);

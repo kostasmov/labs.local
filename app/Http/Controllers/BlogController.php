@@ -36,12 +36,8 @@ class BlogController extends Controller
             $imagePath = $request->file('image')->store('blog_images', 'public');
         }
 
-        $message = $request->input('message');
-        $message = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
-        $message = preg_replace('/(\r\n|\r|\n){2}/', '<br><br>', $message);
-        $message = preg_replace('/(\r\n|\r|\n)/', '<br>', $message);
-
-        $theme = htmlspecialchars($request->input('theme'), ENT_QUOTES, 'UTF-8');
+        $message = base64_encode($request->input('message'));
+        $theme = base64_encode($request->input('theme'));
 
         Blog::create([
             'theme' => $theme,
@@ -65,7 +61,7 @@ class BlogController extends Controller
         $blogs = [];
         $i = 0;
 
-        while (($fields = fgetcsv($handle, 0)) !== false) {
+        while (($fields = fgetcsv($handle, 0, ',')) !== false) {
             $i++;
             if ($i === 1) continue;
 
@@ -80,15 +76,15 @@ class BlogController extends Controller
             ];
 
             $rules = [
-                'theme' => 'required|string|max:100',
-                'message' => 'required|max:1000',
+                'theme' => 'required|string',
+                'message' => 'required',
                 'image' => 'nullable|string'
             ];
 
             $validator = Validator::make($data, $rules);
 
             if ($validator->fails()) {
-                return redirect()->back()->withErrors("Ошибка валидации файла");
+                return redirect()->back()->withErrors("Ошибка валидации данных");
             }
 
             $blogs[] = $data;
