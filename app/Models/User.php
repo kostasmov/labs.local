@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @property bool $is_admin
+ * @property int $id
  * @property string $name
  * @property string $email
  * @method static create(array $array)

@@ -56,23 +56,23 @@ class BlogController extends Controller
     {
         $validated = $request->validate([
             'postID' => 'required|exists:blogs,id',
-            'comment' => 'required|string|max:500',
-            'user' => 'required'
+            'comment' => 'required|max:500',
+            'userID' => 'required|exists:users,id'
         ]);
-
-        $post = Blog::findOrFail($validated['postID']);
 
         $comment = new Comment();
         $comment->blog_id = $validated['postID'];
-        $comment->comment = $validated['comment'];
-        $comment->user_id = $validated['user']->id;
+        $comment->comment = base64_encode($validated['comment']);
+        $comment->user_id = $validated['userID'];
 
         $comment->save();
 
         return response()->json([
-            //'message' => 'Комментарий успешно отправлен!',
-            'comment' => $comment
-        ], 200);
+            'blog_id' => $comment->blog_id,
+            'created_at' => $comment->created_at->format('d.m.Y H:i'),
+            'user_name' => $comment->user->name,
+            'comment_text' => nl2br(e($validated['comment']))
+        ]);
     }
 
     public function upload(Request $request): RedirectResponse
@@ -88,7 +88,7 @@ class BlogController extends Controller
         $blogs = [];
         $i = 0;
 
-        while (($fields = fgetcsv($handle, 0, ',')) !== false) {
+        while (($fields = fgetcsv($handle, 0)) !== false) {
             $i++;
             if ($i === 1) continue;
 

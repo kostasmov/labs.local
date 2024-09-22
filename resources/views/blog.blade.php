@@ -46,7 +46,7 @@
                     @foreach($post->comments as $comment)
                         <div class="comment">
                             <b>{{ $comment->user->name }}</b>
-                            <p>{{ $comment->comment }}</p>
+                            <p>{!! nl2br(e(base64_decode($comment->comment))) !!}</p>
                             <p class="comment-datetime">
                                 {{ $comment->created_at->format('d.m.Y H:i') }}
                             </p>
@@ -62,7 +62,7 @@
     @endif
 @endsection
 
-@section('foot-scripts')
+@section('head-scripts')
     <script>
         function openCommentModal(postID) {
             let modal = document.createElement("div");
@@ -113,31 +113,61 @@
             submitButton.addEventListener('click', function() {
                 let commentText = textarea.value;
 
-                sendCommentToServer(postID, commentText);
+                sendComment(postID, commentText);
 
                 document.body.removeChild(modal);
                 document.body.classList.remove("no-scroll");
             });
         }
 
-        function sendCommentToServer(postID, commentText) {
-            {{--fetch({{ route('send-comment') }}, {--}}
-            {{--    method: 'POST',--}}
-            {{--    headers: {--}}
-            {{--        'Content-Type': 'application/json'--}}
-            {{--    },--}}
-            {{--    body: JSON.stringify({--}}
-            {{--        postID: postID,--}}
-            {{--        user: {{ auth()->user() }},--}}
-            {{--        comment: commentText--}}
-            {{--    })--}}
-            {{--})--}}
-            {{--    // .then(response => {--}}
-            {{--    //     // Работа с объектом Response--}}
-            {{--    // })--}}
-            {{--    // .catch(error => {--}}
-            {{--    //     // Обработка ошибок--}}
-            {{--    // });--}}
+        function sendComment(postID, commentText) {
+            fetch('{{ route('send-comment') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cache-Control': 'no-cache',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    postID: postID,
+                    userID: {{ optional(auth()->user())->id ?? 'null' }},
+                    comment: commentText
+                })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data)
+
+                    const comments = document.getElementById('comments-' + data.blog_id);
+
+                    let commentContainer = document.createElement('div');
+                    commentContainer.classList.add('comment');
+
+                    let username = document.createElement('b');
+                    username.textContent = data.user_name;
+
+                    let commentTextElement = document.createElement('p');
+                    commentTextElement.innerHTML = data.comment_text;
+
+                    let commentDatetime = document.createElement('p');
+                    commentDatetime.classList.add('comment-datetime');
+                    commentDatetime.textContent = data.created_at;
+
+                    commentContainer.appendChild(username);
+                    commentContainer.appendChild(commentTextElement);
+                    commentContainer.appendChild(commentDatetime);
+
+                    comments.appendChild(commentContainer);
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                    alert(error);
+                });
         }
     </script>
 @endsection
