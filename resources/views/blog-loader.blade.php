@@ -18,8 +18,8 @@
         @csrf
         <div>
             <p><b>Выберите .csv файл:</b>
-                <input type="file" name="file" id="file" accept=".csv" required></p>
+                <input class="clickable" type="file" name="file" id="file" accept=".csv" required></p>
         </div>
-        <button type="submit">Загрузить данные</button>
+        <button class="clickable" type="submit">Загрузить данные</button>
     </form>
 @endsection

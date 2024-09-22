@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
 
 use App\Models\Blog;
+use App\Models\Comment;
+
 use Illuminate\Support\Facades\Validator;
+
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -46,6 +50,29 @@ class BlogController extends Controller
         ]);
 
         return redirect()->route('blog')->with('success', 'Запись добавлена!');
+    }
+
+    public function comment_submit(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'postID' => 'required|exists:blogs,id',
+            'comment' => 'required|string|max:500',
+            'user' => 'required'
+        ]);
+
+        $post = Blog::findOrFail($validated['postID']);
+
+        $comment = new Comment();
+        $comment->blog_id = $validated['postID'];
+        $comment->comment = $validated['comment'];
+        $comment->user_id = $validated['user']->id;
+
+        $comment->save();
+
+        return response()->json([
+            //'message' => 'Комментарий успешно отправлен!',
+            'comment' => $comment
+        ], 200);
     }
 
     public function upload(Request $request): RedirectResponse

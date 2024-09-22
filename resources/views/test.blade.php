@@ -157,8 +157,8 @@
         </section>
 
         <section>
-            <input type="submit" value="Отправить">
-            <input type="button" onclick="resetForm()" value="Очистить форму">
+            <input class="clickable" type="submit" value="Отправить">
+            <input class="clickable" type="button" onclick="resetForm()" value="Очистить форму">
         </section>
     </form>
 

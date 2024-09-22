@@ -56,15 +56,6 @@
             </div>
         @endforeach
 
-{{--        <div id="commentModal" class="modal" style="display: none;">--}}
-{{--            <div class="modal-content">--}}
-{{--                <span class="close" onclick="closeCommentModal()">&times;</span>--}}
-{{--                <h2>Добавить комментарий</h2>--}}
-{{--                <textarea id="commentText" rows="4" cols="50"></textarea>--}}
-{{--                <button id="submitComment">Отправить</button>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
         {{ $posts->links('vendor.pagination.custom') }}
     @else
         <p>Постов нет.</p>
@@ -73,68 +64,80 @@
 
 @section('foot-scripts')
     <script>
-        let currentPostId = null;
-
-        function openCommentModal(postId) {
-            currentPostId = postId;
-
+        function openCommentModal(postID) {
             let modal = document.createElement("div");
             modal.classList.add("modal");
 
-            document.body.classList.add("no-scroll");
+            let modalContent = document.createElement("div");
+            modalContent.classList.add("modal-content");
 
-            // let img = document.createElement("img");
-            // img.classList.add("modal-content");
-            // img.src = src;
-            // img.alt = alt;
+            let title = document.createElement('h2');
+            title.textContent = 'Добавить комментарий';
 
-            // modal.appendChild(img);
+            /**
+             * @type {HTMLTextAreaElement}
+             */
+            let textarea = document.createElement('textarea');
+            textarea.id = 'commentText';
+            textarea.rows = 4;
+            textarea.cols = 50;
+
+            let buttonContainer = document.createElement('div');
+            buttonContainer.classList.add('comment-buttons');
+
+            let closeButton = document.createElement('button');
+            closeButton.id = 'closeComment';
+            closeButton.textContent = 'Отмена';
+
+            let submitButton = document.createElement('button');
+            submitButton.id = 'submitComment';
+            submitButton.textContent = 'Отправить';
+
+            buttonContainer.appendChild(closeButton);
+            buttonContainer.appendChild(submitButton);
+
+            modalContent.appendChild(title);
+            modalContent.appendChild(textarea);
+            modalContent.appendChild(buttonContainer);
+
+            modal.appendChild(modalContent);
             document.body.appendChild(modal);
 
-            modal.addEventListener('click', function() {
+            document.body.classList.add("no-scroll");
+
+            closeButton.addEventListener('click', function() {
                 document.body.removeChild(modal);
                 document.body.classList.remove("no-scroll");
             });
 
-            // document.getElementById('commentModal').style.display = 'block';
+            submitButton.addEventListener('click', function() {
+                let commentText = textarea.value;
+
+                sendCommentToServer(postID, commentText);
+
+                document.body.removeChild(modal);
+                document.body.classList.remove("no-scroll");
+            });
         }
 
-        //
-        // function closeCommentModal() {
-        //     document.getElementById('commentModal').style.display = 'none';
-        //     document.getElementById('commentText').value = '';
-        // }
-        //
-        // document.getElementById('submitComment').addEventListener('click', function() {
-        //     const commentText = document.getElementById('commentText').value;
-        //
-        //     if (commentText.trim() === '') {
-        //         alert('Комментарий не может быть пустым.');
-        //         return;
-        //     }
-        //
-        //     fetch('/comments', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        //         },
-        //         body: JSON.stringify({
-        //             post_id: currentPostId,
-        //             comment: commentText
-        //         })
-        //     })
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             const commentsDiv = document.getElementById('comments-' + currentPostId);
-        //             const newComment = document.createElement('div');
-        //             newComment.classList.add('comment');
-        //             newComment.innerHTML = `<strong>${data.author}</strong><p>${data.comment}</p><p>${data.created_at}</p>`;
-        //             commentsDiv.appendChild(newComment);
-        //
-        //             closeCommentModal();
-        //         })
-        //         .catch(error => console.error('Ошибка:', error));
-        // });
+        function sendCommentToServer(postID, commentText) {
+            {{--fetch({{ route('send-comment') }}, {--}}
+            {{--    method: 'POST',--}}
+            {{--    headers: {--}}
+            {{--        'Content-Type': 'application/json'--}}
+            {{--    },--}}
+            {{--    body: JSON.stringify({--}}
+            {{--        postID: postID,--}}
+            {{--        user: {{ auth()->user() }},--}}
+            {{--        comment: commentText--}}
+            {{--    })--}}
+            {{--})--}}
+            {{--    // .then(response => {--}}
+            {{--    //     // Работа с объектом Response--}}
+            {{--    // })--}}
+            {{--    // .catch(error => {--}}
+            {{--    //     // Обработка ошибок--}}
+            {{--    // });--}}
+        }
     </script>
 @endsection

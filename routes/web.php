@@ -59,6 +59,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class,'register_view'])->name('register');
 Route::post('/register', [AuthController::class,'register']);
 
+Route::post('/blog/comment/submit', [BlogController::class,'comment_submit'])->name('send-comment');
 Route::post('/test/submit', [TestController::class,'submit'])->name('test-form');
 Route::post('/contacts/submit', [ContactsController::class,'submit'])->name('contact-form');
 Route::post('/guestbook/submit', [GuestbookController::class,'submit'])->name('guestbook-form');

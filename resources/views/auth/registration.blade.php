@@ -59,7 +59,7 @@
             @endif
         </section>
 
-        <input type="submit" value="Войти">
+        <input class="clickable" type="submit" value="Войти">
     </form>
 @endsection
 

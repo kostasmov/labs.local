@@ -30,6 +30,6 @@
             <input type="password" name="password" id="password" required>
         </div>
 
-        <button type="submit">Войти</button>
+        <button class="clickable" type="submit">Войти</button>
     </form>
 @endsection

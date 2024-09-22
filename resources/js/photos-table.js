@@ -3,7 +3,7 @@ function showImageModal(src, alt) {
   modal.classList.add("modal");
 
   let img = document.createElement("img");
-  img.classList.add("modal-content");
+  // img.classList.add("modal-content");
   img.src = src;
   img.alt = alt;
 

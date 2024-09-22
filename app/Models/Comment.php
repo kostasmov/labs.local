@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property mixed $blog_id
+ * @property mixed $comment
+ * @property int $user_id
+ */
 class Comment extends Model
 {
     use HasFactory;

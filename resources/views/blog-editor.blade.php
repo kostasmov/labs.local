@@ -36,7 +36,7 @@
 
         <section>
             <label for="image">Изображение:</label>
-            <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png">
+            <input class="clickable" type="file" name="image" id="image" accept=".jpg, .jpeg, .png">
         </section>
 
         <section>
@@ -52,7 +52,7 @@
             @endif
         </section>
 
-        <input type="submit" value="Отправить">
-        <input type="button" onclick="resetForm()" value="Очистить форму">
+        <input class="clickable" type="submit" value="Отправить">
+        <input class="clickable" type="button" onclick="resetForm()" value="Очистить форму">
     </form>
 @endsection

@@ -18,8 +18,8 @@
         @csrf
         <div>
             <p><b>Выберите .inc файл:</b>
-            <input type="file" name="file" id="file" accept=".inc" required></p>
+            <input class="clickable" type="file" name="file" id="file" accept=".inc" required></p>
         </div>
-        <button type="submit">Загрузить данные</button>
+        <button class="clickable" type="submit">Загрузить данные</button>
     </form>
 @endsection
