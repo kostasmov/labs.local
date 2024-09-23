@@ -36,11 +36,19 @@
 
                 <p class="blog-datetime">{{ $post->created_at->format('d.m.Y H:i') }}</p>
 
-                @if(auth()->check())
-                    <button class="comment-btn" onclick="openCommentModal({{ $post->id }})">
-                        Добавить комментарий
-                    </button>
-                @endif
+                @auth
+                    <div class="button-container">
+                        <button class="blog-btn" onclick="openCommentModal({{ $post->id }})">
+                            Добавить комментарий
+                        </button>
+
+                        @if ($user instanceof App\Models\User && $user->is_admin)
+                            <button class="blog-btn" onclick="openRedactModal({{ $post }})">
+                                Изменить
+                            </button>
+                        @endif
+                    </div>
+                @endauth
 
                 <div class="comments" id="comments-{{ $post->id }}">
                     @foreach($post->comments as $comment)
@@ -78,19 +86,18 @@
              * @type {HTMLTextAreaElement}
              */
             let textarea = document.createElement('textarea');
-            textarea.id = 'commentText';
             textarea.rows = 4;
             textarea.cols = 50;
 
             let buttonContainer = document.createElement('div');
-            buttonContainer.classList.add('comment-buttons');
+            buttonContainer.classList.add('modal-buttons');
 
             let closeButton = document.createElement('button');
-            closeButton.id = 'closeComment';
+            closeButton.id = 'closeButton';
             closeButton.textContent = 'Отмена';
 
             let submitButton = document.createElement('button');
-            submitButton.id = 'submitComment';
+            submitButton.id = 'submitButton';
             submitButton.textContent = 'Отправить';
 
             buttonContainer.appendChild(closeButton);
@@ -168,6 +175,72 @@
                     console.error('There was a problem with the fetch operation:', error);
                     alert(error);
                 });
+        }
+
+        function openRedactModal(post) {
+            console.log(post);
+
+            let modal = document.createElement("div");
+            modal.classList.add("modal");
+
+            let modalContent = document.createElement("div");
+            modalContent.classList.add("modal-content");
+
+            let title = document.createElement('h2');
+            title.textContent = 'Редактирование блога';
+
+            /**
+             * @type {HTMLInputElement}
+             */
+            let theme = document.createElement('input');
+            theme.value = decodeURIComponent(escape(atob(post.theme)));
+            theme.style.width = '70%';
+            theme.type = 'text';
+
+            /**
+             * @type {HTMLTextAreaElement}
+             */
+            let textarea = document.createElement('textarea');
+            textarea.value = decodeURIComponent(escape(atob(post.message)));
+            textarea.rows = 4;
+            textarea.cols = 50;
+
+            let buttonContainer = document.createElement('div');
+            buttonContainer.classList.add('modal-buttons');
+
+            let closeButton = document.createElement('button');
+            closeButton.id = 'closeButton';
+            closeButton.textContent = 'Отмена';
+
+            let submitButton = document.createElement('button');
+            submitButton.id = 'submitButton';
+            submitButton.textContent = 'Сохранить изменения';
+
+            buttonContainer.appendChild(closeButton);
+            buttonContainer.appendChild(submitButton);
+
+            modalContent.appendChild(title);
+            modalContent.appendChild(theme);
+            modalContent.appendChild(textarea);
+            modalContent.appendChild(buttonContainer);
+
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+
+            document.body.classList.add("no-scroll");
+
+            closeButton.addEventListener('click', function() {
+                document.body.removeChild(modal);
+                document.body.classList.remove("no-scroll");
+            });
+
+            submitButton.addEventListener('click', function() {
+                // let commentText = textarea.value;
+                // sendComment(postID, commentText);
+
+                document.body.removeChild(modal);
+                document.body.classList.remove("no-scroll");
+            });
         }
     </script>
 @endsection
