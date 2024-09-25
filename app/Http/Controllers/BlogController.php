@@ -10,6 +10,7 @@ use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
 use App\Models\Comment;
 
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\View\View;
@@ -75,7 +76,7 @@ class BlogController extends Controller
         ]);
     }
 
-    public function update_blog(Request $request)
+    public function update_blog(Request $request): JSONResponse
     {
         try {
             $validatedData = $request->validate([
@@ -96,10 +97,28 @@ class BlogController extends Controller
                 'theme' => nl2br(e($validatedData['theme'])),
                 'id' => $validatedData['postID']
             ]);
-        } catch (Exception) {
+
+//            $xmlResponse = '<response>' .
+//                '<success>true</success>' .
+//                '<message>' . $blog->message . '</message>' .
+//                '<theme>' . $blog->theme . '</theme>' .
+//                '<id>' . $validatedData['postID'] . '</id>' .
+//                '</response>';
+//
+//            return response($xmlResponse)->header('Content-Type', 'application/xml');
+
+        } catch (Exception $e) {
             return response()->json([
-                'success' => false
+                'success' => false,
+                'error' => $e->getMessage()
             ]);
+
+//            $xmlErrorResponse = '<response>' .
+//                '<success>false</success>' .
+//                '<error>' . $e->getMessage() . '</error>' .
+//                '</response>';
+//
+//            return response($xmlErrorResponse)->header('Content-Type', 'application/xml');
         }
     }
 

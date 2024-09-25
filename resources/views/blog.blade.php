@@ -290,6 +290,37 @@
 
                 document.body.removeChild(modal);
                 document.body.classList.remove("no-scroll");
+
+                // try {
+                //     const response = iframe.contentDocument.body.innerText;
+                //     console.log(response);
+                //
+                //     if (!response) return;
+                //
+                //     const parser = new DOMParser();
+                //     const xmlDoc = parser.parseFromString(response, 'application/xml');
+                //
+                //     const success = xmlDoc.getElementsByTagName('success')[0].textContent === 'true';
+                //
+                //     if (success) {
+                //         const theme = xmlDoc.getElementsByTagName('theme')[0].textContent;
+                //         const message = xmlDoc.getElementsByTagName('message')[0].textContent;
+                //
+                //         themeElement.innerHTML = theme;
+                //         messageElement.innerHTML = message;
+                //     } else {
+                //         const error = xmlDoc.getElementsByTagName('error')[0].textContent;
+                //
+                //         alert('Ошибка:' + error);
+                //     }
+                //
+                //     document.body.removeChild(modal);
+                //     document.body.classList.remove("no-scroll");
+                //
+                // } catch (error) {
+                //     console.error(error);
+                //     alert('Произошла ошибка');
+                // }
             };
 
             submitButton.addEventListener('click', function (event) {
