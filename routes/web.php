@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AlbumController;
@@ -23,14 +20,6 @@ Route::middleware([LogVisitor::class])->group(function () {
         return view('index');
     })->name('index');
 
-    //Route::get('/about-me', function () {
-    //    return view('about-me');
-    //})->name('about-me');
-
-    //Route::get('/study', function () {
-    //    return view('study');
-    //})->name('study');
-
     Route::get('interests', [InterestsController::class,'index'])->name('interests');
     Route::get('/album', [AlbumController::class,'index'])->name('album');
     Route::get('/contacts', [ContactsController::class,'index'])->name('contacts');
@@ -45,6 +34,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/blog/loader', [BlogController::class,'loader'])->name('blog-loader');
     Route::get('/blog/editor', [BlogController::class,'editor'])->name('blog-editor');
     Route::post('/blog/submit', [BlogController::class,'submit'])->name('blog-form');
+    Route::post('/blog/data/submit', [BlogController::class,'update_blog'])->name('update-blog');
     Route::post('/blog/upload', [BlogController::class,'upload'])->name('blog-upload');
 
     Route::get('/guestbook/loader', [GuestbookController::class,'loader'])->name('guestbook-loader');

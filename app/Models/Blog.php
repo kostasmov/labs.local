@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Model create(array $attributes = [])
  * @method static orderBy(string $string, string $string1)
  * @method static findOrFail(mixed $postID)
+ * @method static find(mixed $postID)
  */
 class Blog extends Model
 {

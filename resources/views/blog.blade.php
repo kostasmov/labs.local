@@ -23,7 +23,7 @@
 
     @if (count($posts) > 0)
         @foreach ($posts as $post)
-            <div class="blog">
+            <div class="blog" id="post-{{ $post->id }}">
                 <h1>{!! nl2br(e(base64_decode($post->theme))) !!}</h1>
 
                 <section>
@@ -143,7 +143,7 @@
             })
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Network response was not ok');
+                        throw new Error('Fetch Response не ok');
                     }
                     return response.json();
                 })
@@ -172,13 +172,15 @@
                     comments.appendChild(commentContainer);
                 })
                 .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
+                    console.error('Проблема с FETCH:', error);
                     alert(error);
                 });
         }
 
         function openRedactModal(post) {
-            console.log(post);
+            const postContainer = document.getElementById('post-' + post.id);
+            const themeElement = postContainer.querySelector('h1');
+            const messageElement = postContainer.querySelector('section p');
 
             let modal = document.createElement("div");
             modal.classList.add("modal");
@@ -190,20 +192,52 @@
             title.textContent = 'Редактирование блога';
 
             /**
+             * @type {HTMLIFrameElement}
+             */
+            let iframe = document.createElement('iframe');
+            iframe.name = 'updateFrame';
+            iframe.style.display = 'none';
+
+            /**
+             * @type {HTMLFormElement}
+             */
+            let form = document.createElement('form');
+            form.target = 'updateFrame';
+            form.method = 'post';
+            form.action = '{{ route('update-blog') }}';
+
+            /**
+             * @type {HTMLInputElement}
+             */
+            let postIDInput = document.createElement('input');
+            postIDInput.type = 'hidden';
+            postIDInput.name = 'postID';
+            postIDInput.value = post.id;
+            form.appendChild(postIDInput);
+
+            /**
+             * @type {HTMLInputElement}
+             */
+            let input = document.createElement('input');
+            let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            input.type = 'hidden';
+            input.name = '_token';
+            input.value = csrfToken;
+            form.appendChild(input);
+
+            /**
              * @type {HTMLInputElement}
              */
             let theme = document.createElement('input');
-            theme.value = decodeURIComponent(escape(atob(post.theme)));
-            theme.style.width = '70%';
+            theme.value = themeElement.textContent;
             theme.type = 'text';
+            theme.name = 'theme';
 
-            /**
-             * @type {HTMLTextAreaElement}
-             */
             let textarea = document.createElement('textarea');
-            textarea.value = decodeURIComponent(escape(atob(post.message)));
+            textarea.value = messageElement.textContent;
             textarea.rows = 4;
             textarea.cols = 50;
+            textarea.name = 'message';
 
             let buttonContainer = document.createElement('div');
             buttonContainer.classList.add('modal-buttons');
@@ -212,34 +246,55 @@
             closeButton.id = 'closeButton';
             closeButton.textContent = 'Отмена';
 
+            /**
+             * @type {HTMLButtonElement}
+             */
             let submitButton = document.createElement('button');
             submitButton.id = 'submitButton';
+            submitButton.type = 'submit';
             submitButton.textContent = 'Сохранить изменения';
 
             buttonContainer.appendChild(closeButton);
             buttonContainer.appendChild(submitButton);
 
+            form.appendChild(theme);
+            form.appendChild(textarea);
+            form.appendChild(buttonContainer);
+
             modalContent.appendChild(title);
-            modalContent.appendChild(theme);
-            modalContent.appendChild(textarea);
-            modalContent.appendChild(buttonContainer);
+            modalContent.appendChild(form);
+            modalContent.appendChild(iframe);
 
             modal.appendChild(modalContent);
             document.body.appendChild(modal);
-
             document.body.classList.add("no-scroll");
 
-            closeButton.addEventListener('click', function() {
+            closeButton.addEventListener('click', function () {
                 document.body.removeChild(modal);
                 document.body.classList.remove("no-scroll");
             });
 
-            submitButton.addEventListener('click', function() {
-                // let commentText = textarea.value;
-                // sendComment(postID, commentText);
+            iframe.onload = function() {
+                const response = iframe.contentDocument.body.innerText;
+
+                if (!response) { return; }
+
+                const result = JSON.parse(response);
+
+                if (result.success) {
+                    themeElement.innerHTML = result.theme;
+                    messageElement.innerHTML = result.message;
+                } else {
+                    alert('Ошибка при обновлении поста');
+                }
 
                 document.body.removeChild(modal);
                 document.body.classList.remove("no-scroll");
+            };
+
+            submitButton.addEventListener('click', function (event) {
+                event.preventDefault();
+                form.submit();
             });
         }
     </script>

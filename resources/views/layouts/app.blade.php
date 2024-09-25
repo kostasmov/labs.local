@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Название страницы')</title>
 
 {{--    @vite(['resources/css/style.css'])--}}

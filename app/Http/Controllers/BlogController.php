@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
@@ -64,7 +65,6 @@ class BlogController extends Controller
         $comment->blog_id = $validated['postID'];
         $comment->comment = base64_encode($validated['comment']);
         $comment->user_id = $validated['userID'];
-
         $comment->save();
 
         return response()->json([
@@ -73,6 +73,34 @@ class BlogController extends Controller
             'user_name' => $comment->user->name,
             'comment_text' => nl2br(e($validated['comment']))
         ]);
+    }
+
+    public function update_blog(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'theme' => 'required|max:100',
+                'message' => 'required',
+                'postID' => 'required|exists:blogs,id',
+            ]);
+
+            $blog = Blog::find($validatedData['postID']);
+
+            $blog->theme = base64_encode($validatedData['theme']);
+            $blog->message = base64_encode($validatedData['message']);
+            $blog->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => nl2br(e($validatedData['message'])),
+                'theme' => nl2br(e($validatedData['theme'])),
+                'id' => $validatedData['postID']
+            ]);
+        } catch (Exception) {
+            return response()->json([
+                'success' => false
+            ]);
+        }
     }
 
     public function upload(Request $request): RedirectResponse
