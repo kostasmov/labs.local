@@ -9,7 +9,7 @@ class VisitorStatsController extends Controller
 {
     public function index(): View
     {
-        $visits = Visitor::orderBy('visited_at', 'desc')->paginate(6);
+        $visits = Visitor::orderBy('visited_at', 'desc')->paginate(20);
 
         return view('visitor-stats', compact('visits'));
     }

@@ -135,7 +135,7 @@ class BlogController extends Controller
         $blogs = [];
         $i = 0;
 
-        while (($fields = fgetcsv($handle, 0)) !== false) {
+        while (($fields = fgetcsv($handle)) !== false) {
             $i++;
             if ($i === 1) continue;
 
